@@ -17,7 +17,7 @@ import {
 import { Type } from "class-transformer";
 import { IBranch } from "@data/bank/interfaces/branch.interface";
 
-export class CreateAccountDTO implements Partial<IAccount> {
+export class CreateAccountRequestDTO implements Partial<IAccount> {
   @IsString()
   @Length(10, 100)
   accountName: string;
@@ -45,12 +45,4 @@ export class CreateAccountDTO implements Partial<IAccount> {
 
   @IsDate()
   lastTransactionDate: Date;
-
-  @IsString()
-  @Length(9, 9)
-  nubanSerial: string;
-
-  @IsString()
-  @Length(10, 10)
-  accountNumber: string;
 }

@@ -120,5 +120,5 @@ export class CustomerNameDTO implements ICustomerName {
   @IsOptional()
   @IsString()
   @Min(3)
-  otherNames: string;
+  otherNames?: string;
 }

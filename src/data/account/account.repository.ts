@@ -3,7 +3,7 @@ import { IAccount } from "./interfaces/account.interface";
 
 export class AccountRepository implements IAccountRepository {
   create(account: Partial<IAccount>): boolean {
-    return false;
+    return true;
   }
 
   delete(id: string): null {
@@ -14,10 +14,15 @@ export class AccountRepository implements IAccountRepository {
     throw new Error("This method is not implemented");
   }
 
-  findOne(id: string): IAccount {
-    throw new Error("This method is not implemented");
+  findOneByAccountNumber(id: string): IAccount {
+    throw new Error("Method not implemented.");
   }
-
+  findOneByBVN(bvn: string): IAccount {
+    throw new Error("Method not implemented.");
+  }
+  findOneByNuban(nubanCode: string): IAccount {
+    throw new Error("Method not implemented.");
+  }
   update(id: string, account: Partial<IAccount>): boolean {
     throw new Error("This method is not implemented");
   }

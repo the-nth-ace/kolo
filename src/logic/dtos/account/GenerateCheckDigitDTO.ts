@@ -1,7 +1,6 @@
-import { IBank } from "@data/bank/interfaces/bank.interface";
 import { IsString, Length } from "class-validator";
 
-export class GenerateAccountNumberDTO {
+export class GenerateCheckDigitDTO {
   @IsString()
   @Length(3, 3)
   bankCode: string;

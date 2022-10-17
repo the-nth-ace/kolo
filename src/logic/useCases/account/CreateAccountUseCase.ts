@@ -1,15 +1,33 @@
 import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
-import { CreateAccountDTO } from "@logic/dtos/account/CreateAccountDTO";
-import { UnknownException } from "@logic/exceptions/UnknownException";
+import { GenerateNUBANSerialUseCase } from "@logic/useCases/account/GenerateNUBANSerialUseCase";
+import { GenerateAccountNumberUseCase } from "@logic/useCases/account/GenerateAccountNumberUseCase";
+import { CreateAccountRequestDTO } from "@logic/dtos/account/CreateAccountRequestDTO";
 
 export class CreateAccountUseCase {
-  public constructor(private _accountRepository: IAccountRepository) {}
-  public execute(createAccountDTO: CreateAccountDTO): boolean {
-    try {
-      const customer = this._accountRepository.create(createAccountDTO);
-    } catch (err: any) {
-      throw new UnknownException(`${err.message}`);
-    }
-    return true;
+  private readonly nubanSerial: string;
+  private readonly accountNumber: string;
+  private bankCode: string = "001";
+  public constructor(
+    private _accountRepository: IAccountRepository,
+    private _nubanGen: GenerateNUBANSerialUseCase
+  ) {
+    this.nubanSerial = this._nubanGen.execute();
+    const accountNumberGenerator = new GenerateAccountNumberUseCase({
+      bankCode: "001",
+      nubanSerial: this.nubanSerial,
+    });
+    this.accountNumber = accountNumberGenerator.execute();
+  }
+  public execute(createAccountRequestDTO: CreateAccountRequestDTO): boolean {
+    /**
+     * create account
+     * @param createAccountRequestDTO
+     */
+    const createAccountDTO = {
+      ...createAccountRequestDTO,
+      nubanSerial: this.nubanSerial,
+      accountNumber: this.accountNumber,
+    };
+    return this._accountRepository.create(createAccountDTO);
   }
 }
