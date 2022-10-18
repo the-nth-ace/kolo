@@ -4,10 +4,13 @@ import {
   UpdateCustomerDTO,
   CreateCustomerFeedBackDTO,
 } from "@logic/dtos/customer";
-import { ICustomer } from "./interfaces/customer.interface";
+import { BaseCustomerResponse } from "./interfaces";
 import { ICustomerRepository } from "./interfaces/ICustomerRepository";
 
 export class CustomerRepository implements ICustomerRepository {
+  findAll(): BaseCustomerResponse {
+    throw new Error("Method not implemented.");
+  }
   create(createCustomerDTO: CreateCustomerDTO): IGenericResponse {
     throw new Error("Method not implemented.");
   }

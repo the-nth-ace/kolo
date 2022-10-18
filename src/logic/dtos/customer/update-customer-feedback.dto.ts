@@ -1,10 +1,13 @@
 import { FeedbackCategory } from "@data/feedback/feedback.entity";
-import { IsEmail, IsEnum, IsOptional, IsString, Length } from "class-validator";
+import { IsString, IsOptional, Length, IsEmail, IsEnum } from "class-validator";
+import { CreateCustomerFeedBackDTO } from "./create-customer-feedback.dto";
 
-export class CreateCustomerFeedBackDTO {
-  @IsOptional()
+export class UpdateCustomerFeedBackDTO {
   @IsString()
-  reportingReference?: string;
+  id: string;
+
+  @IsString()
+  reportingReference: string;
 
   @IsOptional()
   @IsString()

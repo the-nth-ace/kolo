@@ -1,17 +1,13 @@
 import { IGenericResponse } from "@data/common/interfaces";
-import {
-  UpdateCustomerDTO,
-  CreateCustomerDTO,
-  CreateCustomerFeedBackDTO,
-} from "@logic/dtos/customer";
 import { BaseCustomerResponse } from "./customer-response.interface";
 
 export interface ICustomerRepository {
-  create(createCustomerDTO: CreateCustomerDTO): IGenericResponse;
-  update(updateCustomerDTO: UpdateCustomerDTO): IGenericResponse;
+  create(createCustomerDTO: any): IGenericResponse;
+  update(updateCustomerDTO: any): IGenericResponse;
   delete(id: string): BaseCustomerResponse;
+  findAll(): BaseCustomerResponse;
   findById(id: string): BaseCustomerResponse;
   findByBVN(bvn: string): BaseCustomerResponse;
   findCustomerAccounts(id: string): IGenericResponse;
-  customerFeedBack(feedbackDTO: CreateCustomerFeedBackDTO): IGenericResponse;
+  customerFeedBack(feedbackDTO: any): IGenericResponse;
 }
