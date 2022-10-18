@@ -15,7 +15,6 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { IBranch } from "@data/bank/interfaces/branch.interface";
 
 export class CreateAccountDTO implements Partial<IAccount> {
   @IsString()

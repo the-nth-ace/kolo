@@ -1,20 +1,15 @@
-import { IAccountRepository } from "./interfaces/IAccountRepository";
+import { CreateAccountDTO } from "@logic/dtos/account/CreateAccountDTO";
 import { IAccount } from "./interfaces/account.interface";
+import { IAccountRepository } from "./interfaces/IAccountRepository";
 
 export class AccountRepository implements IAccountRepository {
   dbSource: any;
-  create(account: Partial<IAccount>): boolean {
-    return true;
+  create(account: CreateAccountDTO): boolean {
+    throw new Error("Method not implemented.");
   }
-
-  delete(id: string): null {
-    return null;
+  find(): IAccount[] {
+    throw new Error("Method not implemented.");
   }
-
-  find(): Array<IAccount> {
-    throw new Error("This method is not implemented");
-  }
-
   findOneByAccountNumber(id: string): IAccount {
     throw new Error("Method not implemented.");
   }
@@ -25,6 +20,9 @@ export class AccountRepository implements IAccountRepository {
     throw new Error("Method not implemented.");
   }
   update(id: string, account: Partial<IAccount>): boolean {
-    throw new Error("This method is not implemented");
+    throw new Error("Method not implemented.");
+  }
+  delete(id: string): null {
+    throw new Error("Method not implemented.");
   }
 }

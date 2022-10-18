@@ -1,15 +1,15 @@
-import { GenerateNumberOfLengthN } from "@logic/useCases/account/GenerateNumberOfLengthN";
-import { AccountRepository } from "@data/account/account.repository";
+import { GenerateNumberOfLengthNUseCase } from "@logic/useCases/account/GenerateNumberOfLengthN";
 import { ResourceNotFoundException } from "@logic/exceptions/ResourceNotFoundException";
+import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
 
 export class GenerateNUBANSerialUseCase {
-  private generateNumberOfLength: GenerateNumberOfLengthN;
-  private accountRepository: AccountRepository;
+  private generateNumberOfLength: GenerateNumberOfLengthNUseCase;
+  private accountRepository: IAccountRepository;
   private readonly nubanLength: number = 9;
 
   public constructor(
-    accountRepository: AccountRepository,
-    generateNumberOfLength: GenerateNumberOfLengthN
+    accountRepository: IAccountRepository,
+    generateNumberOfLength: GenerateNumberOfLengthNUseCase
   ) {
     this.accountRepository = accountRepository;
     this.generateNumberOfLength = generateNumberOfLength;

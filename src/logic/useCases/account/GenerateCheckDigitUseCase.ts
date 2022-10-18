@@ -1,6 +1,4 @@
 import { GenerateCheckDigitDTO } from "@logic/dtos/account/GenerateCheckDigitDTO";
-import { validate } from "class-validator";
-import { ValidationException } from "@logic/exceptions/ValidationException";
 /**
  * Algorithm source: https://www.cbn.gov.ng/OUT/2011/CIRCULARS/BSPD/NUBAN%20PROPOSALS%20V%200%204-%2003%2009%202010.PDF
  * The approved NUBAN format ABC-DEFGHIJKL-M where
@@ -14,7 +12,7 @@ export class GenerateCheckDigitUseCase {
   protected digits: Array<number> = [
     3, 7, 3, 3, 7, 3, 3, 7, 3, 3, 7, 3, 3, 7, 3,
   ];
-  constructor(private generateCheckDigitDTO: GenerateCheckDigitDTO) {
+  constructor(generateCheckDigitDTO: GenerateCheckDigitDTO) {
     this.bankCode = generateCheckDigitDTO.bankCode;
     this.nubanSerial = generateCheckDigitDTO.nubanSerial;
   }

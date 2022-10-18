@@ -1,9 +1,9 @@
-import { AccountRepository } from "@data/account/account.repository";
+import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
 import { UpdateAccountDTO } from "@logic/dtos/account/UpdateAccountDTO";
 
 export class UpdateAccountUseCase {
   constructor(
-    private accountRepo: AccountRepository,
+    private accountRepo: IAccountRepository,
     private updateAccountDto: UpdateAccountDTO
   ) {}
   execute() {

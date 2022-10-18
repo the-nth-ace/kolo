@@ -1,4 +1,4 @@
-export class GenerateNumberOfLengthN {
+export class GenerateNumberOfLengthNUseCase {
   constructor() {}
   public execute(n: number): number {
     let add = 1,

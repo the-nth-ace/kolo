@@ -1,7 +1,7 @@
 import {
   CreateAccountUseCase,
   GenerateNUBANSerialUseCase,
-  GenerateNumberOfLengthN,
+  GenerateNumberOfLengthNUseCase,
 } from "@logic/useCases/account";
 import { AccountRepository } from "@data/account/account.repository";
 import { CreateAccountRequestDTO } from "@logic/dtos/account/CreateAccountRequestDTO";
@@ -26,7 +26,7 @@ afterAll(() => {
 });
 
 describe("Create Account Use Case", () => {
-  const dto = {
+  const dto: CreateAccountRequestDTO = {
     accountName: "Solomon",
     accountOpeningDate: new Date(),
     accountType: AccountType.SAVINGS,
@@ -67,7 +67,7 @@ describe("Create Account Use Case", () => {
     let accountRepository = new AccountRepository();
     let nubanGenerator = new GenerateNUBANSerialUseCase(
       accountRepository,
-      new GenerateNumberOfLengthN()
+      new GenerateNumberOfLengthNUseCase()
     );
     let caUC = new CreateAccountUseCase(accountRepository, nubanGenerator);
     expect(caUC).toBeDefined();
@@ -77,7 +77,7 @@ describe("Create Account Use Case", () => {
     let accountRepository1 = new AccountRepository();
     let nubanGen = new GenerateNUBANSerialUseCase(
       accountRepository1,
-      new GenerateNumberOfLengthN()
+      new GenerateNumberOfLengthNUseCase()
     );
     let caUC1 = new CreateAccountUseCase(accountRepository1, nubanGen);
     expect(caUC1.execute(dto)).toBe(true);

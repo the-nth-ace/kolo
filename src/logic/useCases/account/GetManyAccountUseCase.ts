@@ -1,7 +1,7 @@
-import { AccountRepository } from "@data/account/account.repository";
+import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
 
 export class GetManyAccountUseCase {
-  constructor(private accountRepo: AccountRepository) {}
+  constructor(private accountRepo: IAccountRepository) {}
 
   execute() {
     return this.accountRepo.find();

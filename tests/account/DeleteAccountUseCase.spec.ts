@@ -4,6 +4,9 @@ import { AccountRepository } from "@data/account/account.repository";
 describe("Delete account UseCase Test", () => {
   const acctRepo = new AccountRepository();
   const delUseC = new DeleteAccountUseCase(acctRepo);
+
+  const delAcctRepoMock = jest.spyOn(acctRepo, "delete");
+  delAcctRepoMock.mockReturnValue(null);
   it("should be defined", () => {
     expect(delUseC).toBeDefined();
   });

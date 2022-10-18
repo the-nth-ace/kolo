@@ -1,10 +1,6 @@
 import {
-  CustomerIdType,
   CustomerStatus,
   CustomerType,
-  ICustomerAddress,
-  ICustomerIdentity,
-  ICustomerName,
 } from "../../../data/customer/interfaces/customer.interface";
 import {
   IsEmail,
@@ -66,9 +62,6 @@ export class CreateCustomerDTO {
 
   @IsDate()
   startDateOfRelationship: Date;
-
-  @IsEnum(CustomerStatus)
-  status: CustomerStatus;
 
   @IsEnum(CustomerType)
   type: CustomerType;

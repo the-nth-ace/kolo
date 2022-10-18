@@ -1,14 +1,14 @@
-import { GenerateNumberOfLengthN } from "@logic/useCases/account";
+import { GenerateNumberOfLengthNUseCase } from "@logic/useCases/account";
 
 describe("Generate Number Of Length Use Case", () => {
-  const useC = new GenerateNumberOfLengthN();
+  const useC = new GenerateNumberOfLengthNUseCase();
 
   it("Should be defined", () => {
     expect(useC).toBeDefined();
   });
 
   it("Should generate number as string of length 7", () => {
-    const me = new GenerateNumberOfLengthN();
+    const me = new GenerateNumberOfLengthNUseCase();
     expect(me.execute(7));
     expect(me.execute(10).toString().length).toEqual(10);
     expect(me.execute(11).toString().length).toEqual(11);
