@@ -2,6 +2,7 @@ import { IAccount } from "./account.interface";
 import { CreateAccountDTO } from "../../../logic/dtos/account/CreateAccountDTO";
 
 export interface IAccountRepository {
+  dbSource: any;
   create(account: CreateAccountDTO): boolean;
   find(): Array<IAccount>;
   findOneByAccountNumber(id: string): IAccount;

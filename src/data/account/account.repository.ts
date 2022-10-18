@@ -2,6 +2,7 @@ import { IAccountRepository } from "./interfaces/IAccountRepository";
 import { IAccount } from "./interfaces/account.interface";
 
 export class AccountRepository implements IAccountRepository {
+  dbSource: any;
   create(account: Partial<IAccount>): boolean {
     return true;
   }

@@ -1,5 +1,4 @@
-import { GenerateCheckDigitUseCase } from "@logic/useCases/account/GenerateCheckDigitUseCase";
-import { ValidationException } from "@logic/exceptions/ValidationException";
+import { GenerateCheckDigitUseCase } from "@logic/useCases/account";
 
 describe("Generate Check Digit  Use Case", () => {
   it("Should be defined", () => {

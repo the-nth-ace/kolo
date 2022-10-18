@@ -13,7 +13,7 @@ export class CreateAccountUseCase {
   ) {
     this.nubanSerial = this._nubanGen.execute();
     const accountNumberGenerator = new GenerateAccountNumberUseCase({
-      bankCode: "001",
+      bankCode: this.bankCode,
       nubanSerial: this.nubanSerial,
     });
     this.accountNumber = accountNumberGenerator.execute();

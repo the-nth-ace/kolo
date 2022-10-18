@@ -1,5 +1,5 @@
 import { GenerateAccountNumberDTO } from "@logic/dtos/account/GenerateAccountNumberDTO";
-import { GenerateCheckDigitUseCase } from "@logic/useCases/account/GenerateCheckDigitUseCase";
+import { GenerateCheckDigitUseCase } from "@logic/useCases/account";
 
 export class GenerateAccountNumberUseCase {
   private readonly bankCode: string;
