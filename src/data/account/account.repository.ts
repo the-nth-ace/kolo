@@ -13,6 +13,7 @@ export class AccountRepository implements IAccountRepository {
   findOneByAccountNumber(id: string): IAccount {
     throw new Error("Method not implemented.");
   }
+
   findOneByBVN(bvn: string): IAccount {
     throw new Error("Method not implemented.");
   }
