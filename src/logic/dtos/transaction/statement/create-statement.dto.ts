@@ -3,6 +3,7 @@ import {
   IStatement,
   TransactionType,
 } from "@data/statement/interfaces";
+import { ITransaction } from "@data/transaction/interfaces/transaction.interface";
 import { IsDate, IsEnum, IsNumber, IsString, Length } from "class-validator";
 
 export class CreateStatementDTO {
@@ -37,4 +38,22 @@ export class CreateStatementDTO {
 
   @IsNumber()
   balanceAfter: number;
+
+  static from_transaction(dto: ITransaction) {
+    if(dto.type == TransactionType.)
+
+
+    const payload: CreateStatementDTO = {
+      amount: dto.amount,
+      accountNumber: dto.customer.accountNumber,
+      currency: dto.currency,
+      narration: dto.sourceNarration,
+      referenceId: dto._id,
+      transactionTime: dto.time,
+      transactionType: dto.type,
+      valueDate: dto.valueDate,
+    };
+
+ 
+  }
 }

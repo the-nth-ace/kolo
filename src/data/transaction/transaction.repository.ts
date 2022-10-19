@@ -4,9 +4,6 @@ import { ITransactionRepository } from "./interfaces/transaction.repository.inte
 import { Transaction } from "./transaction.entity";
 
 export class TransactionRepository implements ITransactionRepository {
-  create(createTransactionDTO: Partial<Transaction>): BaseTransactionResponse {
-    throw new Error("Method not implemented.");
-  }
   update(updateTransactionTTO: Partial<Transaction>): IGenericResponse {
     throw new Error("Method not implemented.");
   }
@@ -19,23 +16,19 @@ export class TransactionRepository implements ITransactionRepository {
   findLastN(n: number): BaseTransactionResponse {
     throw new Error("Method not implemented.");
   }
-  createSingleWithinBank(
-    createSingleTransactionWithinDTO: Partial<Transaction>
+  createSingle(
+    createSingleTransactionDTO: Partial<Transaction>
   ): BaseTransactionResponse {
     throw new Error("Method not implemented.");
   }
-  createSingleAnotherBank(
-    createSingleTransactionAnotherDTO: Partial<Transaction>
-  ): BaseTransactionResponse {
-    throw new Error("Method not implemented.");
-  }
-  createMultipleWithinBank(
-    createMultipleTransactionWithinDTO: Partial<Transaction>[]
-  ): BaseTransactionResponse {
-    throw new Error("Method not implemented.");
-  }
-  createMultipleAnotherBank(
-    createMultipleTransactionAnotherDTO: Partial<Transaction>[]
+  createMultiple(
+    createMultipleTransactionDTO: Partial<Transaction>[]
+  ): BaseTransactionResponse;
+  createMultiple(
+    createMultipleTransactionDTO: Partial<Transaction>[]
+  ): BaseTransactionResponse;
+  createMultiple(
+    createMultipleTransactionDTO: unknown
   ): BaseTransactionResponse {
     throw new Error("Method not implemented.");
   }

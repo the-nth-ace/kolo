@@ -1,16 +1,16 @@
 import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
 import { TransactionRepository } from "@data/transaction/transaction.repository";
-import { CreateSingleTransactionWithinDTO } from "@logic/dtos/transaction";
-import { CreateSingleTransactionWithinBankUseCase } from "@logic/useCases/transaction/create-single-transaction-within-bank.use-case";
+import { CreateSingleTransactionOutsideDTO } from "@logic/dtos/transaction";
+import { CreateSingleTransactionOutsideBankUseCase } from "@logic/useCases/transaction";
 
-describe("Create Single Transaction Within Bank Use Case", () => {
+describe("CreateSingleTransactionOutsideBankUseCase", () => {
   const transactionRepo = new TransactionRepository();
   const mockCreateSingle = jest.spyOn(transactionRepo, "createSingle");
 
   mockCreateSingle.mockImplementation(() => {
     return new BaseTransactionResponse();
   });
-  const dto: CreateSingleTransactionWithinDTO = {
+  const dto: CreateSingleTransactionOutsideDTO = {
     amount: 1000,
     description: "Payment for services",
     channel: "string",
@@ -21,7 +21,7 @@ describe("Create Single Transaction Within Bank Use Case", () => {
     latitude: 0,
     longitude: 0,
     sourceNarration: "asdfsd",
-
+    destinationBankCode: "234",
     customer: {
       accountNumber: "{{accountNumber}}",
       firstname: "Ope",
@@ -33,7 +33,7 @@ describe("Create Single Transaction Within Bank Use Case", () => {
       sourceCurrency: "NGN",
     },
   };
-  const useCase = new CreateSingleTransactionWithinBankUseCase(
+  const useCase = new CreateSingleTransactionOutsideBankUseCase(
     transactionRepo,
     dto
   );
