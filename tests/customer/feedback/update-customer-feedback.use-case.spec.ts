@@ -4,7 +4,7 @@ import { UpdateCustomerFeedBackDTO } from "@logic/dtos/customer";
 import { BaseResponse } from "@logic/reponses/BaseResponse";
 import { UpdateCustomerFeedBackUseCase } from "@logic/useCases/customer/feedback";
 
-describe("Create Customer Feedback Use Case", () => {
+describe("Update Customer Feedback Use Case", () => {
   const crudRepo = new GenericCRUDRepository();
   const dto: UpdateCustomerFeedBackDTO = {
     id: "34343",

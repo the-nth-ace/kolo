@@ -1,3 +1,5 @@
+import { EntityStatus } from "@data/common";
+
 export interface IStatement {
   id: string;
   accountNumber: string;
@@ -10,6 +12,7 @@ export interface IStatement {
   transactionType: TransactionType;
   valueDate: Date;
   balanceAfter: number;
+  status: EntityStatus;
 }
 
 export enum TransactionType {

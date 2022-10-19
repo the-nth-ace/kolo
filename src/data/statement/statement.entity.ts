@@ -9,6 +9,7 @@
 // transactionType 	string 	Required The type of transaction
 // valueDate 	datetime 	Required  The value date for transaction on the system in the format DDMMYYYY
 
+import { EntityStatus } from "@data/common";
 import { DebitOrCredit, IStatement, TransactionType } from "./interfaces";
 
 // balanceAfter 	number 	Optional The balance of the account after the transaction was approved or authorized *\
@@ -24,6 +25,7 @@ export class Statement implements IStatement {
   transactionType: TransactionType;
   valueDate: Date;
   balanceAfter: number;
+  status: EntityStatus;
 
   public constructor(
     id: string,
@@ -36,7 +38,8 @@ export class Statement implements IStatement {
     transactionTime: Date,
     transactionType: TransactionType,
     valueDate: Date,
-    balanceAfter: number
+    balanceAfter: number,
+    status: EntityStatus
   ) {
     this.id = id;
     this.accountNumber = acountNumber;
@@ -49,5 +52,6 @@ export class Statement implements IStatement {
     this.transactionType = transactionType;
     this.valueDate = valueDate;
     this.balanceAfter = balanceAfter;
+    this.status = status;
   }
 }
