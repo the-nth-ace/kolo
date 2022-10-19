@@ -1,7 +1,7 @@
 import { GenericCRUDRepository } from "@data/common/generic-crud.repository";
 import { DebitOrCredit, TransactionType } from "@data/statement/interfaces";
 import { BaseStatementResponse } from "@data/statement/statement-response.interface";
-import { CreateStatementDTO } from "@logic/dtos/transaction/create-statement.dto";
+import { CreateStatementDTO } from "@logic/dtos/transaction/statement/create-statement.dto";
 import { BaseResponse } from "@logic/reponses/BaseResponse";
 import { CreateStatementUseCase } from "@logic/useCases/transaction/statement/create-statement.use-case";
 
