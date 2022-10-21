@@ -1,5 +1,5 @@
 export interface IGenericResponse {
-  status: string;
+  status: number;
   message: string;
   data: any;
 }

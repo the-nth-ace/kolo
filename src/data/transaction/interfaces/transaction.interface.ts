@@ -1,5 +1,10 @@
-import { TransactionType } from "@data/statement/interfaces";
+import { DebitOrCredit, TransactionType } from "@data/statement/interfaces";
 
+export enum TransactionStatus {
+  Pending = "Pending",
+  Success = "Success",
+  Failure = "Failure",
+}
 export interface ITransaction {
   _id: string;
   statusWebHook?: string;
@@ -16,9 +21,13 @@ export interface ITransaction {
   longitude?: number;
   customer: ITransactionSourceCustomer;
   description: string;
-  type: TransactionType;
-  time: Date;
+  transactionType: TransactionType;
+  transactionTime: Date;
   valueDate: Date;
+  status: TransactionStatus;
+  statusCode: string;
+  referenceId: string;
+  debitOrCredit: DebitOrCredit;
 }
 
 // Get a method that can convert an account to this format.

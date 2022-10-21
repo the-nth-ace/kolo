@@ -2,8 +2,8 @@ import { DebitOrCredit } from "@data/statement/interfaces";
 import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
 import { TransactionStatus } from "@data/transaction/interfaces/transaction.interface";
 import { TestTransactionRepository } from "@data/transaction/transaction.repository";
-import { CreateSingleTransactionWithinDTO } from "@logic/dtos/transaction";
-import { CreateMultipleTransactionWithinUseCase } from "@logic/useCases/transaction";
+import { CreateSingleTransactionOutsideDTO } from "@logic/dtos/transaction";
+import { CreateMultipleTransactionOutsideUseCase } from "@logic/useCases/transaction";
 
 describe("Create Multiple Transaction Within use case", () => {
   const repo = new TestTransactionRepository();
@@ -12,7 +12,7 @@ describe("Create Multiple Transaction Within use case", () => {
   mockCreateMultiple.mockImplementation(() => {
     return new BaseTransactionResponse();
   });
-  const data: Array<CreateSingleTransactionWithinDTO> = [
+  const data: Array<CreateSingleTransactionOutsideDTO> = [
     {
       amount: 1000,
       description: "Payment for services",
@@ -24,7 +24,7 @@ describe("Create Multiple Transaction Within use case", () => {
       latitude: 0,
       longitude: 0,
       sourceNarration: "asdfsd",
-
+      destinationBankCode: "234",
       customer: {
         accountNumber: "{{accountNumber}}",
         firstname: "Ope",
@@ -36,9 +36,9 @@ describe("Create Multiple Transaction Within use case", () => {
         sourceCurrency: "NGN",
       },
       status: TransactionStatus.Pending,
-      statusCode: "33",
-      referenceId: "33",
-      debitOrCredit: DebitOrCredit.Credit,
+      statusCode: "",
+      referenceId: "",
+      debitOrCredit: DebitOrCredit.Debit,
     },
     {
       amount: 1000,
@@ -51,7 +51,7 @@ describe("Create Multiple Transaction Within use case", () => {
       latitude: 0,
       longitude: 0,
       sourceNarration: "asdfsd",
-
+      destinationBankCode: "234",
       customer: {
         accountNumber: "{{accountNumber}}",
         firstname: "Ope",
@@ -63,12 +63,12 @@ describe("Create Multiple Transaction Within use case", () => {
         sourceCurrency: "NGN",
       },
       status: TransactionStatus.Pending,
-      statusCode: "33",
-      referenceId: "33",
-      debitOrCredit: DebitOrCredit.Credit,
+      statusCode: "",
+      referenceId: "",
+      debitOrCredit: DebitOrCredit.Debit,
     },
   ];
-  const useCase = new CreateMultipleTransactionWithinUseCase(repo, data);
+  const useCase = new CreateMultipleTransactionOutsideUseCase(repo, data);
 
   it("should be defined", () => {
     expect(useCase).toBeDefined();

@@ -1,10 +1,12 @@
+import { DebitOrCredit } from "@data/statement/interfaces";
 import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
-import { TransactionRepository } from "@data/transaction/transaction.repository";
+import { TransactionStatus } from "@data/transaction/interfaces/transaction.interface";
+import { TestTransactionRepository } from "@data/transaction/transaction.repository";
 import { CreateSingleTransactionWithinDTO } from "@logic/dtos/transaction";
 import { CreateSingleTransactionWithinBankUseCase } from "@logic/useCases/transaction/create-single-transaction-within-bank.use-case";
 
 describe("Create Single Transaction Within Bank Use Case", () => {
-  const transactionRepo = new TransactionRepository();
+  const transactionRepo = new TestTransactionRepository();
   const mockCreateSingle = jest.spyOn(transactionRepo, "createSingle");
 
   mockCreateSingle.mockImplementation(() => {
@@ -32,6 +34,10 @@ describe("Create Single Transaction Within Bank Use Case", () => {
       sourceAccountName: "string",
       sourceCurrency: "NGN",
     },
+    status: TransactionStatus.Pending,
+    statusCode: "33",
+    referenceId: "33",
+    debitOrCredit: DebitOrCredit.Credit,
   };
   const useCase = new CreateSingleTransactionWithinBankUseCase(
     transactionRepo,

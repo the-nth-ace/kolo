@@ -3,7 +3,7 @@ import { ICustomer } from "@data/customer/interfaces/customer.interface";
 import { IGenericResponse } from "@data/common/interfaces";
 
 export class GetCustomerAccountsResponse implements IGenericResponse {
-  status: string;
+  status: number;
   message: string;
   data: {
     customer: ICustomer;

@@ -1,10 +1,12 @@
+import { DebitOrCredit } from "@data/statement/interfaces";
 import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
-import { TransactionRepository } from "@data/transaction/transaction.repository";
+import { TransactionStatus } from "@data/transaction/interfaces/transaction.interface";
+import { TestTransactionRepository } from "@data/transaction/transaction.repository";
 import { CreateSingleTransactionOutsideDTO } from "@logic/dtos/transaction";
 import { CreateSingleTransactionOutsideBankUseCase } from "@logic/useCases/transaction";
 
 describe("CreateSingleTransactionOutsideBankUseCase", () => {
-  const transactionRepo = new TransactionRepository();
+  const transactionRepo = new TestTransactionRepository();
   const mockCreateSingle = jest.spyOn(transactionRepo, "createSingle");
 
   mockCreateSingle.mockImplementation(() => {
@@ -32,6 +34,10 @@ describe("CreateSingleTransactionOutsideBankUseCase", () => {
       sourceAccountName: "string",
       sourceCurrency: "NGN",
     },
+    status: TransactionStatus.Pending,
+    statusCode: "",
+    referenceId: "",
+    debitOrCredit: DebitOrCredit.Debit,
   };
   const useCase = new CreateSingleTransactionOutsideBankUseCase(
     transactionRepo,

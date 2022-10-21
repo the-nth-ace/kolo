@@ -3,7 +3,10 @@ import { BaseTransactionResponse } from "./interfaces/transaction-response.inter
 import { ITransactionRepository } from "./interfaces/transaction.repository.interface";
 import { Transaction } from "./transaction.entity";
 
-export class TransactionRepository implements ITransactionRepository {
+export class TestTransactionRepository implements ITransactionRepository {
+  findOne(id: string): BaseTransactionResponse {
+    throw new Error("Method not implemented.");
+  }
   update(updateTransactionTTO: Partial<Transaction>): IGenericResponse {
     throw new Error("Method not implemented.");
   }
