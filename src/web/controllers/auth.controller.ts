@@ -14,14 +14,13 @@ export class AuthController {
   @Post("/login")
   async login(@Body() loginDTo: LoginDTO) {
     const useCase = new LoginUserUseCase(this._userRepo, loginDTo);
-    return useCase.execute();
+    return await useCase.execute();
   }
 
   @Post("/signup")
   @HttpCode(201)
   public async signup(@Body() signUpUserDTO: SignUpUserRequestDTO) {
     const useCase = new SignUpUserUseCase(this._userRepo, signUpUserDTO);
-    const resp = await useCase.execute();
-    return HttpResponseFactory.fromAppResponse(resp);
+    return await useCase.execute();
   }
 }

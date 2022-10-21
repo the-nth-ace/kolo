@@ -6,6 +6,11 @@ import { useExpressServer, useContainer } from "routing-controllers";
 import { Container } from "typedi";
 import * as path from "path";
 import { DbContext } from "@data/DbContext";
+import { authMiddleware } from "@web/middlwares/auth.middleware";
+import {
+  ResponseInerceptor,
+  ResponseMiddleWare,
+} from "@web/middlwares/response.middleware";
 
 const health = require("express-ping");
 
@@ -20,8 +25,8 @@ export class ExpressConfig {
     this.app.use(bodyParser.json());
     this.app.use(health.ping());
     this.app.use(helmet());
-    this.app.use(this.clientErrorHandler);
     this.setUpControllers();
+    this.app.use(this.clientErrorHandler);
     this.connectDB();
   }
 
@@ -30,6 +35,8 @@ export class ExpressConfig {
     useContainer(Container);
     useExpressServer(this.app, {
       controllers: [controllersPath + "/*.ts"],
+      middlewares: [ResponseMiddleWare],
+      interceptors: [ResponseInerceptor],
       cors: true,
     });
   }

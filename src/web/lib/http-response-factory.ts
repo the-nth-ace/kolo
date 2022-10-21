@@ -17,8 +17,14 @@ export class HttpResponseFactory {
   ) {}
 
   private static success(resp: BaseResponse) {
+    const payload: any = {};
+    // remove resp_type and status from BaseResponse object
+    for (let respKey in resp) {
+      if (respKey == "resp_type" || respKey == "status") continue;
+      payload[respKey] = resp[respKey as keyof typeof resp];
+    }
     return {
-      ...resp,
+      ...payload,
     };
   }
 

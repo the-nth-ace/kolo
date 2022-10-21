@@ -6,10 +6,13 @@ import { IUser } from "./user.model";
 @Service()
 export class MongoUserRepository implements IUserRepository {
   constructor(public dbContext: DbContext) {}
-  findUserByEmail(email: string) {
-    return this.dbContext.user.findOne({
-      email,
+
+  async findUserByEmail(email: string): Promise<IUser | null> {
+    const user = await this.dbContext.user.findOne({
+      email: email,
     });
+
+    return user;
   }
   async createUser(dto: Partial<IUser>): Promise<any> {
     return await this.dbContext.user.create(dto);
