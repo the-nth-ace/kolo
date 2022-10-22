@@ -2,7 +2,6 @@ import { MongoUserRepository } from "@data/user/user.repository.mongo";
 import { LoginDTO } from "@logic/dtos/user/login-user.dto";
 import { SignUpUserRequestDTO } from "@logic/dtos/user/signup-user-request.dto";
 import { LoginUserUseCase, SignUpUserUseCase } from "@logic/useCases/user";
-import { HttpResponseFactory } from "@web/lib/http-response-factory";
 import { Body, HttpCode, JsonController, Post } from "routing-controllers";
 import { Service } from "typedi";
 

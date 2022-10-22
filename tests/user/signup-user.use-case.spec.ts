@@ -1,5 +1,4 @@
 import { TestUserRepository } from "@data/user/test-user.repository";
-import { SignUpUserDTO } from "@logic/dtos/user";
 import { SignUpUserRequestDTO } from "@logic/dtos/user/signup-user-request.dto";
 import { BaseResponse } from "@logic/reponses/BaseResponse";
 import { SignUpUserUseCase } from "@logic/useCases/user";

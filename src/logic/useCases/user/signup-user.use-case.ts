@@ -29,7 +29,7 @@ export class SignUpUserUseCase {
         ResponseType.BadRequestError
       );
     const newUser = await this._userRepo.createUser(payload);
-    if (newUser) return new GenericSuccessResponse("signup successfull");
+    if (newUser) return new GenericSuccessResponse("signup successful");
     return new GenericFailureResponse("something went wrong");
   }
 }

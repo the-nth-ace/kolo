@@ -58,7 +58,7 @@ export class LoginUserUseCase {
   }
 
   async signUser(user: IUser) {
-    return await jwt.sign(
+    return jwt.sign(
       { _id: user._id?.toString(), email: user.email },
       this.secret,
       {
