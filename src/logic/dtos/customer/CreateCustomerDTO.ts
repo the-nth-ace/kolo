@@ -1,7 +1,8 @@
 import {
   CustomerStatus,
   CustomerType,
-} from "../../../data/customer/interfaces/customer.interface";
+  ICustomerAddress,
+} from "@data/customer/interfaces/customer.interface";
 import {
   IsEmail,
   IsDate,
@@ -13,15 +14,28 @@ import {
   IsNotEmptyObject,
   IsObject,
   ValidateNested,
+  IsPostalCode,
 } from "class-validator";
 
-import {
-  CustomerAddressDTO,
-  CustomerNameDTO,
-  CustomerIdentityDTO,
-} from "./customerDTO";
+import { CustomerNameDTO, CustomerIdentityDTO } from "./customerDTO";
 import { Type } from "class-transformer";
 
+export class CustomerAddressDTO implements ICustomerAddress {
+  @IsString()
+  postalCode: string;
+
+  @IsString()
+  city: string;
+
+  @IsString()
+  country: string;
+
+  @IsString()
+  state: string;
+
+  @IsString()
+  street: string;
+}
 export class CreateCustomerDTO {
   @IsString()
   @Length(10, 10)
@@ -33,7 +47,7 @@ export class CreateCustomerDTO {
   @ValidateNested()
   @Type(() => CustomerAddressDTO)
   customerAddress: CustomerAddressDTO;
-
+  //
   @IsDefined()
   @IsNotEmptyObject()
   @IsObject()
@@ -42,6 +56,7 @@ export class CreateCustomerDTO {
   customerName: CustomerNameDTO;
 
   @IsDate()
+  @Type(() => Date)
   dateOfBirth: Date;
 
   @IsEmail()
@@ -61,8 +76,9 @@ export class CreateCustomerDTO {
   phone: string;
 
   @IsDate()
+  @Type(() => Date)
   startDateOfRelationship: Date;
 
   @IsEnum(CustomerType)
-  type: CustomerType;
+  customerType: CustomerType;
 }

@@ -8,6 +8,7 @@ import {
 import { ResponseType } from "@logic/reponses/ResponseType.enum";
 
 import { Service } from "typedi";
+import { InternalServerError, BadRequestError } from "routing-controllers";
 
 @Service()
 export class SignUpUserUseCase {
@@ -23,13 +24,9 @@ export class SignUpUserUseCase {
       firstName: this.dto.lastName,
     };
     const user = await this._userRepo.findUserByEmail(this.dto.email);
-    if (user)
-      return new GenericFailureResponse(
-        "User with this email exists",
-        ResponseType.BadRequestError
-      );
-    const newUser = await this._userRepo.createUser(payload);
-    if (newUser) return new GenericSuccessResponse("signup successful");
-    return new GenericFailureResponse("something went wrong");
+    if (user) throw new BadRequestError("User with this email alrealy exists");
+    const newUser = await this._userRepo.signupUser(payload);
+    if (newUser) return;
+    throw new InternalServerError("Something went wrong");
   }
 }

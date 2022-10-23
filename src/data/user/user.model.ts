@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import { IRole } from "./role.model";
+
+const saltRounds = 8;
 
 export interface IUser {
   _id: string;
@@ -6,8 +10,7 @@ export interface IUser {
   passwordHash: string;
   firstName: string;
   lastName: string;
-  isStaff: boolean;
-  isAdmin: boolean;
+  roles: any[];
   createdAt: Date;
   updatedAt?: Date | undefined;
   token?: string | undefined;
@@ -63,10 +66,6 @@ export const UserSchema = new mongoose.Schema({
     },
   ],
 });
-
-import bcrypt from "bcrypt";
-
-const saltRounds = 8;
 
 UserSchema.pre("save", async function (next) {
   const user = this;

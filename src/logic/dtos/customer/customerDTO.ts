@@ -26,57 +26,6 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 
-export class CustomerDTO implements ICustomer {
-  @IsString()
-  @Length(10, 10)
-  bvn: string;
-
-  @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
-  @ValidateNested()
-  @Type(() => CustomerAddressDTO)
-  customerAddress: CustomerAddressDTO;
-
-  @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
-  @ValidateNested()
-  @Type(() => CustomerNameDTO)
-  customerName: CustomerNameDTO;
-
-  @IsDate()
-  dateOfBirth: Date;
-
-  @IsEmail()
-  email: string;
-
-  @IsUUID()
-  id: string;
-
-  @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
-  @ValidateNested()
-  @Type(() => CustomerIdentityDTO)
-  identity: CustomerIdentityDTO;
-
-  @IsNumber()
-  numberOfAccounts: number;
-
-  @IsPhoneNumber()
-  phone: string;
-
-  @IsDate()
-  startDateOfRelationship: Date;
-
-  @IsEnum(CustomerStatus)
-  status: CustomerStatus;
-
-  @IsEnum(CustomerType)
-  type: CustomerType;
-}
-
 export class CustomerAddressDTO implements ICustomerAddress {
   @IsPostalCode()
   postalCode: string;
@@ -105,20 +54,71 @@ export class CustomerIdentityDTO implements ICustomerIdentity {
   countryOfIssue: string;
 
   @IsDate()
+  @Type(() => Date)
   expiryDate: Date;
 }
 
 export class CustomerNameDTO implements ICustomerName {
   @IsString()
-  @Min(3)
+  @Length(3, 100)
   firstName: string;
 
   @IsString()
-  @Min(3)
+  @Length(3, 100)
   lastName: string;
 
   @IsOptional()
-  @IsString()
+  @Length(3, 100)
   @Min(3)
   otherNames?: string;
 }
+// export class CustomerDTO implements ICustomer {
+//   @IsString()
+//   @Length(10, 10)
+//   bvn: string;
+//
+//   @IsDefined()
+//   @IsNotEmptyObject()
+//   @IsObject()
+//   @ValidateNested()
+//   @Type(() => CustomerAddressDTO)
+//   customerAddress: CustomerAddressDTO;
+//
+//   @IsDefined()
+//   @IsNotEmptyObject()
+//   @IsObject()
+//   @ValidateNested()
+//   @Type(() => CustomerNameDTO)
+//   customerName: CustomerNameDTO;
+//
+//   @IsDate()
+//   dateOfBirth: Date;
+//
+//   @IsEmail()
+//   email: string;
+//
+//   @IsUUID()
+//   id: string;
+//
+//   @IsDefined()
+//   @IsNotEmptyObject()
+//   @IsObject()
+//   @ValidateNested()
+//   @Type(() => CustomerIdentityDTO)
+//   identity: CustomerIdentityDTO;
+//
+//   @IsNumber()
+//   numberOfAccounts: number;
+//
+//   @IsPhoneNumber("ZZ")
+//   phone: string;
+//
+//   @IsDate()
+//   startDateOfRelationship: Date;
+//
+//   @IsEnum(CustomerStatus)
+//   status: CustomerStatus;
+//
+//   @IsEnum(CustomerType)
+//   type: CustomerType;
+// }

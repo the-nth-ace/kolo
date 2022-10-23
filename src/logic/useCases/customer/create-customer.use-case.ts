@@ -7,7 +7,7 @@ export class CreateCustomerUseCase {
     private _createCustomerDTO: CreateCustomerDTO
   ) {}
 
-  public execute() {
-    return this._customerRepo.create(this._createCustomerDTO);
+  public async execute() {
+    const data = await this._customerRepo.create(this._createCustomerDTO);
   }
 }

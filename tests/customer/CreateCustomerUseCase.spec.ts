@@ -5,7 +5,7 @@ import {
 } from "@data/customer/interfaces/customer.interface";
 import { CreateCustomerDTO } from "@logic/dtos/customer";
 import { BaseResponse } from "@logic/reponses/BaseResponse";
-import { CreateCustomerUseCase } from "@logic/useCases/customer/CreateCustomerUseCase";
+import { CreateCustomerUseCase } from "@logic/useCases/customer/create-customer.use-case";
 
 describe("Create Customer Use Case Test", () => {
   const customerRepo = new CustomerRepository();
@@ -35,7 +35,7 @@ describe("Create Customer Use Case Test", () => {
     numberOfAccounts: 1,
     phone: "122354677",
     startDateOfRelationship: new Date(),
-    type: CustomerType.INDIVIDUAL,
+    customerType: CustomerType.INDIVIDUAL,
   };
   createMethodMock.mockImplementation(() => {
     return new BaseResponse();

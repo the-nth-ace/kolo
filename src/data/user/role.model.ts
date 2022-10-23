@@ -5,9 +5,18 @@ export interface IRole {
   name: string;
 }
 
-export const Role = mongoose.model(
-  "Role",
-  new mongoose.Schema({
-    name: String,
-  })
-);
+// export const Role = mongoose.model(
+//   "Role",
+//   new mongoose.Schema({
+//     name: String,
+//   })
+// );
+
+export const RoleSchema = new mongoose.Schema({
+  name: {
+    type: "String",
+    required: true,
+  },
+});
+
+export type Role = typeof RoleSchema;

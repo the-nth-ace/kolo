@@ -13,7 +13,7 @@ class User {
 }
 
 export enum UserRole {
-  USER = "User",
-  STAFF = "Staff",
-  ADMIN = "Admin",
+  USER = "user",
+  STAFF = "staff",
+  ADMIN = "admin",
 }

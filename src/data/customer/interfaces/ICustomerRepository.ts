@@ -4,12 +4,12 @@ import { DbContext } from "../../DbContext";
 
 export interface ICustomerRepository {
   dbContext: DbContext;
-  create(createCustomerDTO: any): IGenericResponse;
-  update(updateCustomerDTO: any): IGenericResponse;
-  delete(id: string): BaseCustomerResponse;
-  findAll(): BaseCustomerResponse;
-  findById(id: string): BaseCustomerResponse;
-  findByBVN(bvn: string): BaseCustomerResponse;
-  findCustomerAccounts(id: string): IGenericResponse;
-  customerFeedBack(feedbackDTO: any): IGenericResponse;
+  create(createCustomerDTO: any): any;
+  update(updateCustomerDTO: any): any;
+  delete(id: string): any;
+  findAll(): any;
+  findById(id: string): any;
+  findByBVN(bvn: string): any;
+  findCustomerAccounts(id: string): any;
+  customerFeedBack(feedbackDTO: any): any;
 }

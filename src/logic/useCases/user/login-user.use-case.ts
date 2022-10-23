@@ -9,6 +9,7 @@ import {
 import { ResponseType } from "@logic/reponses/ResponseType.enum";
 import jwt from "jsonwebtoken";
 import { IUser } from "@data/user/user.model";
+import { BadRequestError } from "routing-controllers";
 
 @Service()
 export class LoginUserUseCase {
@@ -19,11 +20,7 @@ export class LoginUserUseCase {
       this.dto.email
     );
 
-    if (!foundUser)
-      return new GenericFailureResponse(
-        "Check your email and password",
-        ResponseType.ValidationError
-      );
+    if (!foundUser) throw new BadRequestError("check your email and password");
 
     const isMatch = await this.checkPassword(
       this.dto.password,
@@ -32,9 +29,8 @@ export class LoginUserUseCase {
 
     if (isMatch) {
       const token = await this.signUser(foundUser);
-      const resp = new GenericSuccessResponse();
 
-      resp.data = {
+      const data = {
         user: {
           id: foundUser._id.toString(),
           email: foundUser.email,
@@ -42,12 +38,9 @@ export class LoginUserUseCase {
         token: token,
       };
 
-      return resp;
+      return data;
     }
-    return new GenericFailureResponse(
-      "Check password",
-      ResponseType.ValidationError
-    );
+    throw new BadRequestError("check your email and password");
   }
 
   async checkPassword(

@@ -17,11 +17,11 @@ export const authMiddleware = async (
       throw new Error();
     }
 
-    const decoded = jwt.verify(token, secret);
+    const decoded: any = jwt.verify(token, secret);
     (req as CustomRequest).token = decoded;
 
     next();
   } catch (err) {
-    res.status(401).send("Please authenticate");
+    res.status(401).send("Not Authenticated");
   }
 };
