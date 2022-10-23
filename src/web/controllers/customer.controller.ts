@@ -25,10 +25,8 @@ export class CustomerController {
   }
 
   @Post("/")
-  // @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   async addCustomer(@Body() createCustomerDTO: CreateCustomerDTO) {
-    return createCustomerDTO;
-    console.log(new CreateCustomerDTO());
     const useCase = new CreateCustomerUseCase(
       this._customerRepo,
       createCustomerDTO
