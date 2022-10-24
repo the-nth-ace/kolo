@@ -1,8 +1,8 @@
-import { DebitOrCredit } from "@data/statement/interfaces";
+import { DebitOrCredit } from "../../../data-layer/statement/interfaces";
 import {
   ITransactionSourceCustomer,
   TransactionStatus,
-} from "@data/transaction/interfaces/transaction.interface";
+} from "../../../data-layer/transaction/interfaces/transaction.interface";
 import {
   IsEnum,
   IsNumber,

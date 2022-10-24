@@ -1,7 +1,7 @@
 import {
   BaseCustomerResponse,
   ICustomerRepository,
-} from "@data/customer/interfaces";
+} from "../../../data-layer/customer/interfaces";
 import { GetCustomerByBVNDTO } from "@logic/dtos/customer";
 
 export class GetCustomerByBVNUseCase {

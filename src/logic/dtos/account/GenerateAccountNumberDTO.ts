@@ -1,4 +1,4 @@
-import { IBank } from "@data/bank/interfaces/bank.interface";
+import { IBank } from "../../../data-layer/bank/interfaces/bank.interface";
 import { IsString, Length } from "class-validator";
 
 export class GenerateAccountNumberDTO {

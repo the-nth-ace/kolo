@@ -1,4 +1,4 @@
-import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
+import { IAccountRepository } from "../../../data-layer/account/interfaces/IAccountRepository";
 
 export class GetManyAccountUseCase {
   constructor(private accountRepo: IAccountRepository) {}

@@ -2,8 +2,8 @@ import {
   DebitOrCredit,
   IStatement,
   TransactionType,
-} from "@data/statement/interfaces";
-import { ITransaction } from "@data/transaction/interfaces/transaction.interface";
+} from "../../../../data-layer/statement/interfaces";
+import { ITransaction } from "../../../../data-layer/transaction/interfaces/transaction.interface";
 import { IsDate, IsEnum, IsNumber, IsString, Length } from "class-validator";
 
 export class CreateStatementDTO {

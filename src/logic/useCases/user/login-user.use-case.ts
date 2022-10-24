@@ -1,4 +1,4 @@
-import { IUserRepository } from "@data/user/interfaces/user-repository.interface";
+import { IUserRepository } from "../../../data-layer/user/interfaces/user-repository.interface";
 import { LoginDTO } from "@logic/dtos/user/login-user.dto";
 import { Service } from "typedi";
 import bcrypt from "bcrypt";
@@ -8,7 +8,7 @@ import {
 } from "@logic/reponses";
 import { ResponseType } from "@logic/reponses/ResponseType.enum";
 import jwt from "jsonwebtoken";
-import { IUser } from "@data/user/user.model";
+import { IUser } from "../../../data-layer/user/user.model";
 import { BadRequestError } from "routing-controllers";
 
 @Service()

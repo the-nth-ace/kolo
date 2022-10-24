@@ -1,5 +1,5 @@
-import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
-import { ITransactionRepository } from "@data/transaction/interfaces/transaction.repository.interface";
+import { BaseTransactionResponse } from "../../../data-layer/transaction/interfaces/transaction-response.interface";
+import { ITransactionRepository } from "../../../data-layer/transaction/interfaces/transaction.repository.interface";
 import { CreateSingleTransactionOutsideDTO } from "@logic/dtos/transaction";
 
 export class CreateSingleTransactionOutsideBankUseCase {

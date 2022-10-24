@@ -1,5 +1,5 @@
-import { EntityStatus } from "@data/common";
-import { ICustomerRepository } from "@data/customer/interfaces/ICustomerRepository";
+import { EntityStatus } from "../../../data-layer/common";
+import { ICustomerRepository } from "../../../data-layer/customer/interfaces/ICustomerRepository";
 
 export class DeleteCustomerUseCase {
   constructor(

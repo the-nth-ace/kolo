@@ -1,4 +1,4 @@
-import { IGenericResponse } from "@data/common/interfaces";
+import { IGenericResponse } from "../../data-layer/common/interfaces";
 import { ResponseType } from "./ResponseType.enum";
 
 export class BaseResponse implements IGenericResponse {

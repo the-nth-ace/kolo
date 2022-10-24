@@ -1,5 +1,5 @@
-import { ITransaction } from "@data/transaction/interfaces/transaction.interface";
-import { ITransactionRepository } from "@data/transaction/interfaces/transaction.repository.interface";
+import { ITransaction } from "../../../data-layer/transaction/interfaces/transaction.interface";
+import { ITransactionRepository } from "../../../data-layer/transaction/interfaces/transaction.repository.interface";
 import { CreateSingleTransactionWithinDTO } from "@logic/dtos/transaction";
 
 export class CreateMultipleTransactionWithinUseCase {

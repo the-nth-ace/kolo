@@ -5,8 +5,7 @@ import helmet from "helmet";
 import { useExpressServer, useContainer } from "routing-controllers";
 import { Container } from "typedi";
 import * as path from "path";
-import { DbContext } from "@data/DbContext";
-import { authMiddleware } from "@web/middlwares/auth.middleware";
+import { DbContext } from "@data-layer/DbContext";
 
 const health = require("express-ping");
 

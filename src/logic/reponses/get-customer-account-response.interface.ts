@@ -1,6 +1,6 @@
-import { IAccount } from "@data/account/interfaces/account.interface";
-import { ICustomer } from "@data/customer/interfaces/customer.interface";
-import { IGenericResponse } from "@data/common/interfaces";
+import { IAccount } from "@data-layer/account/interfaces/account.interface";
+import { IGenericResponse } from "@data-layer/common/interfaces";
+import { ICustomer } from "@data-layer/customer";
 
 export class GetCustomerAccountsResponse implements IGenericResponse {
   status: number;
@@ -9,4 +9,5 @@ export class GetCustomerAccountsResponse implements IGenericResponse {
     customer: ICustomer;
     accounts: Array<IAccount>;
   };
+  resp_type: any;
 }

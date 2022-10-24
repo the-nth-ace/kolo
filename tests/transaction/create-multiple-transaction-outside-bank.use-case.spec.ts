@@ -1,7 +1,7 @@
-import { DebitOrCredit } from "@data/statement/interfaces";
-import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
-import { TransactionStatus } from "@data/transaction/interfaces/transaction.interface";
-import { TestTransactionRepository } from "@data/transaction/transaction.repository";
+import { DebitOrCredit } from "../../src/data-layer/statement/interfaces";
+import { BaseTransactionResponse } from "../../src/data-layer/transaction/interfaces/transaction-response.interface";
+import { TransactionStatus } from "../../src/data-layer/transaction/interfaces/transaction.interface";
+import { TestTransactionRepository } from "../../src/data-layer/transaction/transaction.repository";
 import { CreateSingleTransactionOutsideDTO } from "@logic/dtos/transaction";
 import { CreateMultipleTransactionOutsideUseCase } from "@logic/useCases/transaction";
 
@@ -78,7 +78,7 @@ describe("Create Multiple Transaction Within use case", () => {
     expect(useCase).toHaveProperty("_transactionRepo");
   });
 
-  it("should have a data property", () => {
+  it("should have a data-layer property", () => {
     expect(useCase).toHaveProperty("data");
   });
 

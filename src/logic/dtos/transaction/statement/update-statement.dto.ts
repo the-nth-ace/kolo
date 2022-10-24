@@ -1,4 +1,4 @@
-import { TransactionType, DebitOrCredit } from "@data/statement/interfaces";
+import { TransactionType, DebitOrCredit } from "../../../../data-layer/statement/interfaces";
 import {
   IsDate,
   IsEnum,

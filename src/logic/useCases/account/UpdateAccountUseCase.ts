@@ -1,4 +1,4 @@
-import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
+import { IAccountRepository } from "../../../data-layer/account/interfaces/IAccountRepository";
 import { UpdateAccountDTO } from "@logic/dtos/account/UpdateAccountDTO";
 
 export class UpdateAccountUseCase {

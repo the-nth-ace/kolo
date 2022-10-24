@@ -1,5 +1,5 @@
 import { LoginUserUseCase } from "@logic/useCases/user";
-import { TestUserRepository } from "@data/user/test-user.repository";
+import { TestUserRepository } from "../../src/data-layer/user/test-user.repository";
 import { LoginDTO } from "@logic/dtos/user";
 
 describe("Login User Use Case", () => {

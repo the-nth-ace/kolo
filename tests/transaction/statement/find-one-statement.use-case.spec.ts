@@ -1,5 +1,5 @@
-import { GenericCRUDRepository } from "@data/common/generic-crud.repository";
-import { BaseStatementResponse } from "@data/statement/statement-response.interface";
+import { GenericCRUDRepository } from "../../../src/data-layer/common/generic-crud.repository";
+import { BaseStatementResponse } from "../../../src/data-layer/statement/statement-response.interface";
 import { FindOneStatementUseCase } from "@logic/useCases/transaction/statement/find-one-statement.use-case";
 
 describe("Find One Statement UseCase", () => {

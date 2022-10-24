@@ -1,4 +1,4 @@
-import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
+import { IAccountRepository } from "../../../data-layer/account/interfaces/IAccountRepository";
 import { GenerateNUBANSerialUseCase } from "@logic/useCases/account/GenerateNUBANSerialUseCase";
 import { GenerateAccountNumberUseCase } from "@logic/useCases/account/GenerateAccountNumberUseCase";
 import { CreateAccountRequestDTO } from "@logic/dtos/account/CreateAccountRequestDTO";

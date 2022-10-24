@@ -1,5 +1,5 @@
-import { IGenericCRUDRepository } from "@data/common/interfaces";
-import { FeedbackEntity } from "@data/feedback/feedback.entity";
+import { IGenericCRUDRepository } from "../../../../data-layer/common/interfaces";
+import { FeedbackEntity } from "../../../../data-layer/feedback/feedback.entity";
 import { GetResourceByIdDTO } from "@logic/dtos";
 import { BaseResponse } from "@logic/reponses/BaseResponse";
 

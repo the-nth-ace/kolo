@@ -1,5 +1,5 @@
-import { BaseCustomerResponse } from "@data/customer/interfaces";
-import { ICustomerRepository } from "@data/customer/interfaces/ICustomerRepository";
+import { BaseCustomerResponse } from "../../../data-layer/customer/interfaces";
+import { ICustomerRepository } from "../../../data-layer/customer/interfaces/ICustomerRepository";
 import { GetCustomerByIdDTO } from "@logic/dtos/customer";
 
 export class GetCustomerByIdUseCase {

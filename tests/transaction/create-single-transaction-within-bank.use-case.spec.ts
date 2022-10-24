@@ -1,7 +1,7 @@
-import { DebitOrCredit } from "@data/statement/interfaces";
-import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
-import { TransactionStatus } from "@data/transaction/interfaces/transaction.interface";
-import { TestTransactionRepository } from "@data/transaction/transaction.repository";
+import { DebitOrCredit } from "../../src/data-layer/statement/interfaces";
+import { BaseTransactionResponse } from "../../src/data-layer/transaction/interfaces/transaction-response.interface";
+import { TransactionStatus } from "../../src/data-layer/transaction/interfaces/transaction.interface";
+import { TestTransactionRepository } from "../../src/data-layer/transaction/transaction.repository";
 import { CreateSingleTransactionWithinDTO } from "@logic/dtos/transaction";
 import { CreateSingleTransactionWithinBankUseCase } from "@logic/useCases/transaction/create-single-transaction-within-bank.use-case";
 

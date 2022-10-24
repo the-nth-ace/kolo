@@ -1,4 +1,4 @@
-import { IUserRepository } from "@data/user/interfaces/user-repository.interface";
+import { IUserRepository } from "../../../data-layer/user/interfaces/user-repository.interface";
 import { SignUpUserDTO } from "@logic/dtos/user";
 import { SignUpUserRequestDTO } from "@logic/dtos/user/signup-user-request.dto";
 import {

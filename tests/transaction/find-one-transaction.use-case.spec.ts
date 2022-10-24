@@ -1,5 +1,5 @@
-import { BaseTransactionResponse } from "@data/transaction/interfaces/transaction-response.interface";
-import { TestTransactionRepository } from "@data/transaction/transaction.repository";
+import { BaseTransactionResponse } from "../../src/data-layer/transaction/interfaces/transaction-response.interface";
+import { TestTransactionRepository } from "../../src/data-layer/transaction/transaction.repository";
 import { FindOneTransactionUseCase } from "@logic/useCases/transaction";
 
 describe("Find One Transaction use case", () => {

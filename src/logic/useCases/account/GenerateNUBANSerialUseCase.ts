@@ -1,6 +1,6 @@
 import { GenerateNumberOfLengthNUseCase } from "@logic/useCases/account/GenerateNumberOfLengthN";
 import { ResourceNotFoundException } from "@logic/exceptions/ResourceNotFoundException";
-import { IAccountRepository } from "@data/account/interfaces/IAccountRepository";
+import { IAccountRepository } from "../../../data-layer/account/interfaces/IAccountRepository";
 
 export class GenerateNUBANSerialUseCase {
   private generateNumberOfLength: GenerateNumberOfLengthNUseCase;

@@ -1,4 +1,4 @@
-import { AccountType } from "@data/account/interfaces/account.interface";
+import { AccountType } from "../../../data-layer/account/interfaces/account.interface";
 
 export class GetAccountTypeCodeUseCase {
   private accountTypeToCode: Record<AccountType, string> = {

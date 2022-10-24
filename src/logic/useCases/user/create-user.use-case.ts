@@ -1,4 +1,4 @@
-import { IUserRepository } from "@data/user/interfaces/user-repository.interface";
+import { IUserRepository } from "../../../data-layer/user/interfaces/user-repository.interface";
 import { CreateUserDTO } from "../../dtos/user/create-user.dto";
 import { BadRequestError, InternalServerError } from "routing-controllers";
 
@@ -21,7 +21,7 @@ export class CreateUserUseCase {
       name: { $in: this.dto.roles },
     });
 
-    if (roles.length == 0) throw new BadRequestError("Check your request data");
+    if (roles.length == 0) throw new BadRequestError("Check your request data-layer");
     const newUser = new User({
       email: this.dto.email,
       passwordHash: this.dto.password,

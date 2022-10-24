@@ -1,4 +1,4 @@
-import { ICustomerRepository } from "../../../data/customer/interfaces/ICustomerRepository";
+import { ICustomerRepository } from "../../../data-layer/customer/interfaces/ICustomerRepository";
 import { GenericSuccessResponse } from "../../reponses/GenericSuccessResponse";
 
 export class GetAllCustomerUseCase {

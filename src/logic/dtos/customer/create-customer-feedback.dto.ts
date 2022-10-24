@@ -1,4 +1,4 @@
-import { FeedbackCategory } from "@data/feedback/feedback.entity";
+import { FeedbackCategory } from "../../../data-layer/feedback/feedback.entity";
 import { IsEmail, IsEnum, IsOptional, IsString, Length } from "class-validator";
 
 export class CreateCustomerFeedBackDTO {

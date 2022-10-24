@@ -1,13 +1,13 @@
-import { UserRole } from "@data/user/user.entity";
+import { UserRole } from "../../data-layer/user/user.entity";
 import { Response, Request, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { GenericFailureResponse } from "@logic/reponses/GenericFailureResponse";
 import { Container } from "typedi";
-import { MongoUserRepository } from "@data/user/user.repository.mongo";
+import { MongoUserRepository } from "../../data-layer/user/user.repository.mongo";
 import { GetUserByIdUseCase } from "@logic/useCases/user";
-import { IUser } from "@data/user/user.model";
-import { DbContext } from "@data/DbContext";
-import { IRole } from "@data/user/role.model";
+import { IUser } from "../../data-layer/user/user.model";
+import { DbContext } from "../../data-layer/DbContext";
+import { IRole } from "../../data-layer/user/role.model";
 
 export interface CustomRequest extends Request {
   token: string | JwtPayload;

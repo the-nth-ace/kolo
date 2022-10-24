@@ -1,6 +1,6 @@
 import { Body, JsonController, Post } from "routing-controllers";
 import { CreateUserDTO } from "@logic/dtos/user/create-user.dto";
-import { MongoUserRepository } from "@data/user/user.repository.mongo";
+import { MongoUserRepository } from "../../data-layer/user/user.repository.mongo";
 import { CreateUserUseCase } from "@logic/useCases/user/create-user.use-case";
 import { Service } from "typedi";
 

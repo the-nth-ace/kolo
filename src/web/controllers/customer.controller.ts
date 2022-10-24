@@ -9,7 +9,7 @@ import {
   Delete,
 } from "routing-controllers";
 import { Service } from "typedi";
-import { MongoCustomerRepository } from "@data/customer/customer.repository.mongo";
+import { MongoCustomerRepository } from "../../data-layer/customer/customer.repository.mongo";
 import { CreateCustomerDTO, UpdateCustomerDTO } from "@logic/dtos/customer";
 import {
   CreateCustomerUseCase,
@@ -19,8 +19,8 @@ import {
   GetAllCustomerUseCase,
 } from "@logic/useCases/customer";
 import { AllowedRoles } from "@web/middlwares/role.middleware";
-import { UserRole } from "@data/user/user.entity";
-import { DeleteCustomerUseCase } from "../../logic/useCases/customer/delete-customer.use-case";
+import { UserRole } from "../../data-layer/user/user.entity";
+import { DeleteCustomerUseCase } from "@logic/useCases/customer";
 
 @JsonController("/customer")
 @Service()

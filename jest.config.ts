@@ -177,7 +177,7 @@ export default {
   // transform: undefined,
 
   moduleNameMapper: {
-    "^@data/(.*)$": "<rootDir>/src/data/$1",
+    "^@data-layer/(.*)$": "<rootDir>/src/data-layer/$1",
     "^@web/(.*)$": "<rootDir>/src/web/$1",
     "^@logic/(.*)$": "<rootDir>/src/logic/$1",
   },

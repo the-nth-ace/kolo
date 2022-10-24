@@ -1,9 +1,9 @@
 import {
   IAccount,
   AccountType,
-} from "@data/account/interfaces/account.interface";
+} from "../../../data-layer/account/interfaces/account.interface";
 import { CustomerDTO } from "../customer/customerDTO";
-import { EntityStatus } from "@data/common";
+import { EntityStatus } from "../../../data-layer/common";
 import {
   IsDate,
   IsDefined,
@@ -15,7 +15,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { IBranch } from "@data/bank/interfaces/branch.interface";
+import { IBranch } from "../../../data-layer/bank/interfaces/branch.interface";
 
 export class CreateAccountRequestDTO implements Partial<IAccount> {
   @IsString()

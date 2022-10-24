@@ -1,6 +1,6 @@
 import { IsEnum, IsOptional, IsString, Length } from "class-validator";
-import { AccountType } from "@data/account/interfaces/account.interface";
-import { EntityStatus } from "@data/common";
+import { AccountType } from "../../../data-layer/account/interfaces/account.interface";
+import { EntityStatus } from "../../../data-layer/common";
 
 export class UpdateAccountDTO {
   @IsString()

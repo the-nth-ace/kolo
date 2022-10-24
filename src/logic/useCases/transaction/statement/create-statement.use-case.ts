@@ -1,6 +1,6 @@
-import { IGenericCRUDRepository } from "@data/common/interfaces";
-import { BaseStatementResponse } from "@data/statement/statement-response.interface";
-import { Statement } from "@data/statement/statement.entity";
+import { IGenericCRUDRepository } from "../../../../data-layer/common/interfaces";
+import { BaseStatementResponse } from "../../../../data-layer/statement/statement-response.interface";
+import { Statement } from "../../../../data-layer/statement/statement.entity";
 import { CreateStatementDTO } from "@logic/dtos/transaction/statement/create-statement.dto";
 
 export class CreateStatementUseCase {

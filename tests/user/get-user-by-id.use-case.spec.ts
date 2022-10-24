@@ -1,4 +1,4 @@
-import { TestUserRepository } from "@data/user/test-user.repository";
+import { TestUserRepository } from "../../src/data-layer/user/test-user.repository";
 import { GetUserByIdUseCase } from "@logic/useCases/user/get-user-by-id.use-case";
 import { BaseResponse } from "../../src/logic/reponses/BaseResponse";
 

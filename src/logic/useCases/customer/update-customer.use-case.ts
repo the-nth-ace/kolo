@@ -1,4 +1,4 @@
-import { ICustomerRepository } from "@data/customer/interfaces/ICustomerRepository";
+import { ICustomerRepository } from "../../../data-layer/customer/interfaces/ICustomerRepository";
 import { UpdateCustomerDTO } from "@logic/dtos/customer";
 import { BadRequestError } from "routing-controllers";
 

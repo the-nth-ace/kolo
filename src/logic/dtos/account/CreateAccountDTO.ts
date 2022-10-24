@@ -1,9 +1,9 @@
 import {
   IAccount,
   AccountType,
-} from "@data/account/interfaces/account.interface";
+} from "../../../data-layer/account/interfaces/account.interface";
 import { CustomerDTO } from "../customer/customerDTO";
-import { EntityStatus } from "@data/common";
+import { EntityStatus } from "../../../data-layer/common";
 import {
   IsDate,
   IsDefined,
