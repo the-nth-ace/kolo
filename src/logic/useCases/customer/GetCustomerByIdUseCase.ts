@@ -8,7 +8,9 @@ export class GetCustomerByIdUseCase {
     private getCustomerByIdDTO: GetCustomerByIdDTO
   ) {}
 
-  execute(): BaseCustomerResponse {
-    return this._customerRepo.findById(this.getCustomerByIdDTO.id);
+  async execute() {
+    return (
+      await this._customerRepo.findById(this.getCustomerByIdDTO.id)
+    ).toObject();
   }
 }

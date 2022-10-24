@@ -2,16 +2,25 @@ import {
   Body,
   Get,
   JsonController,
+  Param,
   Post,
   UseBefore,
+  Patch,
+  Delete,
 } from "routing-controllers";
 import { Service } from "typedi";
 import { MongoCustomerRepository } from "@data/customer/customer.repository.mongo";
-import { GetAllCustomerUseCase } from "@logic/useCases/customer/get-all-customers.use-case";
-import { CreateCustomerDTO } from "@logic/dtos/customer";
-import { CreateCustomerUseCase } from "@logic/useCases/customer";
+import { CreateCustomerDTO, UpdateCustomerDTO } from "@logic/dtos/customer";
+import {
+  CreateCustomerUseCase,
+  GetCustomerByIdUseCase,
+  UpdateCustomerUseCase,
+  GetCustomerByBVNUseCase,
+  GetAllCustomerUseCase,
+} from "@logic/useCases/customer";
 import { AllowedRoles } from "@web/middlwares/role.middleware";
 import { UserRole } from "@data/user/user.entity";
+import { DeleteCustomerUseCase } from "../../logic/useCases/customer/delete-customer.use-case";
 
 @JsonController("/customer")
 @Service()
@@ -23,6 +32,36 @@ export class CustomerController {
     const useCase = new GetAllCustomerUseCase(this._customerRepo);
     return await useCase.execute();
   }
+  @Get("/:id")
+  async getOneCustomerById(@Param("id") id: string) {
+    const useCase = new GetCustomerByIdUseCase(this._customerRepo, { id });
+    return await useCase.execute();
+  }
+
+  @Patch("/:id")
+  async updateCustomerById(
+    @Param("id") id: string,
+    @Body() updateDTO: UpdateCustomerDTO
+  ) {
+    const useCase = new UpdateCustomerUseCase(
+      this._customerRepo,
+      id,
+      updateDTO
+    );
+    return await useCase.execute();
+  }
+
+  @Delete("/:id")
+  async deleteCustomerById(@Param("id") id: string) {
+    const useCase = new DeleteCustomerUseCase(this._customerRepo, id);
+    return await useCase.execute();
+  }
+
+  @Get("/bvn/:bvn")
+  async getOneCustomerByBvn(@Param("bvn") bvn: string) {
+    const useCase = new GetCustomerByBVNUseCase(this._customerRepo, { bvn });
+    return await useCase.execute();
+  }
 
   @Post("/")
   @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
@@ -31,7 +70,6 @@ export class CustomerController {
       this._customerRepo,
       createCustomerDTO
     );
-
     return await useCase.execute();
   }
 }

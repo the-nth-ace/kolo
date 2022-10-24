@@ -1,5 +1,6 @@
 import { BaseResponse } from "@logic/reponses";
 import { ResponseType } from "@logic/reponses/ResponseType.enum";
+import { Document } from "mongoose";
 import {
   BadRequestError,
   ForbiddenError,

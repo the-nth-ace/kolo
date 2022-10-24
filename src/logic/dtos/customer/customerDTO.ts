@@ -26,22 +26,22 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 
-export class CustomerAddressDTO implements ICustomerAddress {
-  @IsPostalCode()
-  postalCode: string;
+// export class CustomerAddressDTO implements ICustomerAddress {
+//   @IsPostalCode()
+//   postalCode: string;
 
-  @IsString()
-  city: string;
+//   @IsString()
+//   city: string;
 
-  @IsString()
-  country: string;
+//   @IsString()
+//   country: string;
 
-  @IsString()
-  state: string;
+//   @IsString()
+//   state: string;
 
-  @IsString()
-  street: string;
-}
+//   @IsString()
+//   street: string;
+// }
 
 export class CustomerIdentityDTO implements ICustomerIdentity {
   @IsString()

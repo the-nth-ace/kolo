@@ -10,7 +10,9 @@ export class GetCustomerByBVNUseCase {
     private getCustomerByBVNDTO: GetCustomerByBVNDTO
   ) {}
 
-  execute(): BaseCustomerResponse {
-    return this._customerRepo.findByBVN(this.getCustomerByBVNDTO.bvn);
+  async execute() {
+    return (
+      await this._customerRepo.findByBVN(this.getCustomerByBVNDTO.bvn)
+    ).toObject();
   }
 }

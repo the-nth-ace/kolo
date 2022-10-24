@@ -20,6 +20,7 @@ export class MongoUserRepository implements IUserRepository {
   async signupUser(dto: Partial<IUser>): Promise<any> {
     return await this.dbContext.user.create(dto);
   }
+
   async findUserById(id: IUser["_id"]) {
     return await this.dbContext.user.findById(id);
   }

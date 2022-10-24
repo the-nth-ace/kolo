@@ -9,5 +9,6 @@ export class CreateCustomerUseCase {
 
   public async execute() {
     const data = await this._customerRepo.create(this._createCustomerDTO);
+    return data.toObject();
   }
 }

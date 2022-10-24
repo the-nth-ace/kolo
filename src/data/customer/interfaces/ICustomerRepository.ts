@@ -5,7 +5,7 @@ import { DbContext } from "../../DbContext";
 export interface ICustomerRepository {
   dbContext: DbContext;
   create(createCustomerDTO: any): any;
-  update(updateCustomerDTO: any): any;
+  update(id: any, updateCustomerDTO: any): any;
   delete(id: string): any;
   findAll(): any;
   findById(id: string): any;
