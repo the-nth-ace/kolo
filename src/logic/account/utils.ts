@@ -1,4 +1,14 @@
-import { GenerateCheckDigitDTO } from "@logic/dtos/account/GenerateCheckDigitDTO";
+import { IsString, Length } from "class-validator";
+
+export class GenerateCheckDigitDTO {
+  @IsString()
+  @Length(3, 3)
+  bankCode: string;
+
+  @IsString()
+  @Length(9, 9)
+  nubanSerial: string;
+}
 
 export const generateNumberOfLengthN = (n: number): number => {
   let add = 1,

@@ -56,7 +56,7 @@ describe("Find Update Customer  Use Case Test", function () {
     expect(useCase).toHaveProperty("id");
   });
 
-  it("Should have an update request dto property", () => {
+  it("Should have an update requests dto property", () => {
     expect(useCase).toHaveProperty("updateCustomerRequestDTO");
   });
 

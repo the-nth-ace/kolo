@@ -1,7 +1,7 @@
 import { ICustomerRepository } from "@data-layer/customer/interfaces";
 import { DbContext } from "@data-layer/DbContext";
 import { ICustomer } from "@data-layer/customer/customer.model";
-import { CreateCustomerRequestDTO } from "@logic/customer/request";
+import { CreateCustomerRequestDTO } from "@logic/customer/requests";
 
 export class TestCustomerRepository implements ICustomerRepository {
   dbContext: DbContext;

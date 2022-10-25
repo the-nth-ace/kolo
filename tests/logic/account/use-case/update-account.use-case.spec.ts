@@ -34,7 +34,7 @@ describe("Update Account Use Case Test", function () {
     expect(updateMock).toHaveBeenCalledWith(data, payload);
   });
 
-  it("Should return a ICustomer Object when execute is called", async () => {
+  it("Should return a string when execute is called", async () => {
     const res = await useCase.execute();
     expect(res).toEqual("");
   });

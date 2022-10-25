@@ -2,8 +2,11 @@ import { Service } from "typedi";
 import { ICustomerRepository } from "@data-layer/customer/interfaces";
 import { DbContext } from "@data-layer/DbContext";
 import { ICustomer } from "./customer.model";
-import { CreateCustomerRequestDTO } from "@logic/customer/request";
-import { UpdateCustomerDTO } from "@logic/dtos/customer";
+import {
+  CreateCustomerRequestDTO,
+  UpdateCustomerRequestDTO,
+} from "@logic/customer/requests";
+
 import { InternalServerError } from "routing-controllers";
 
 @Service()
@@ -17,7 +20,7 @@ export class MongoCustomerRepository implements ICustomerRepository {
   }
   async update(
     id: string,
-    updateCustomerDTO: UpdateCustomerDTO
+    updateCustomerDTO: UpdateCustomerRequestDTO
   ): Promise<ICustomer | null> {
     try {
       return await this.dbContext.customer

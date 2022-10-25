@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 import { ICustomer } from "@data-layer/customer";
-import { AccountType } from "@data-layer/account/enums/account-type.enum";
+import { AccountType } from "@data-layer/account/";
 import { EntityStatus } from "@data-layer/common";
+
 export class IAccount {
   _id: string;
   accountName: string;
-  accountNumber: string; // Should not be in request
-  accountOpeningDate: Date; // Should not be in request
+  accountNumber: string;
+  accountOpeningDate: Date;
   accountType: any;
   currency: string;
   customer: ICustomer;
-  lastTransactionDate: Date; // Should not be in request
-  status: any; // Should not be in request
+  lastTransactionDate: Date;
+  status: any;
 }
 
 export const AccountSchema = new mongoose.Schema({
