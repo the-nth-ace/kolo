@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { TestCustomerRepository } from "@data-layer/customer/customer.test-repository";
+import { TestCustomerRepository } from "@data-layer/customer/customer.test.repository";
 import { CreateCustomerUseCase } from "@logic/customer";
 import {
   CreateCustomerRequestDTO,
@@ -32,7 +32,7 @@ describe("Create Customer Use Case Test", () => {
     customerType: CustomerType.INDIVIDUAL,
     dateOfBirth: new Date(),
     email: "",
-    identity: [],
+    identities: [],
     phone: "",
   };
 

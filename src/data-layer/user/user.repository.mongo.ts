@@ -22,15 +22,15 @@ export class MongoUserRepository implements IUserRepository {
   }
 
   async findUserById(id: IUser["_id"]) {
-    return await this.dbContext.user.findById(id);
+    return this.dbContext.user.findById(id);
   }
   async updateUser(id: IUser["_id"], payload: Partial<IUser>) {
-    return await this.dbContext.user.findByIdAndUpdate(id, payload);
+    return this.dbContext.user.findByIdAndUpdate(id, payload);
   }
   async findAllUsers() {
     return this.dbContext.user.find();
   }
   async deleteCustomerUseCase(id: string) {
-    return await this.dbContext.user.findByIdAndDelete(id);
+    return this.dbContext.user.findByIdAndDelete(id);
   }
 }

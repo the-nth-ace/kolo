@@ -98,7 +98,7 @@ export class CreateCustomerRequestDTO {
   @IsObject()
   @ValidateNested({ each: true })
   @Type(() => CustomerIdentityDTO)
-  identity: Array<CustomerIdentityDTO>;
+  identities: Array<CustomerIdentityDTO>;
 
   @IsString()
   phone: string;

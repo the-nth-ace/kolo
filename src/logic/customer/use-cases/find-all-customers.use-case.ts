@@ -4,7 +4,7 @@ import { Document } from "mongoose";
 
 export class FindAllCustomersUseCase implements IUseCase {
   constructor(private _customerRepo: ICustomerRepository) {}
-  async execute(): Promise<Array<Document<ICustomer>>> {
+  async execute(): Promise<Array<ICustomer>> {
     return await this._customerRepo.findAll();
   }
 }

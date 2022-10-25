@@ -1,5 +1,5 @@
 import { FindCustomerByIdUseCase } from "@logic/customer/use-cases/find-customer-by-id.use-case";
-import { TestCustomerRepository } from "@data-layer/customer/customer.test-repository";
+import { TestCustomerRepository } from "@data-layer/customer/customer.test.repository";
 import { CustomerStatus, CustomerType, ICustomer } from "@data-layer/customer";
 import { CustomerAddressDTO, CustomerNameDTO } from "@logic/customer";
 

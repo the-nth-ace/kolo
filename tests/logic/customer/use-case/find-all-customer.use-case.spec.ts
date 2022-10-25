@@ -1,15 +1,9 @@
 import "reflect-metadata";
-import { TestCustomerRepository } from "@data-layer/customer/customer.test-repository";
-import { CustomerStatus, CustomerType, ICustomer } from "@data-layer/customer";
-import {
-  CustomerAddressDTO,
-  CustomerNameDTO,
-  FindAllCustomersUseCase,
-} from "@logic/customer";
+import { TestCustomerRepository } from "@data-layer/customer/customer.test.repository";
+import { FindAllCustomersUseCase } from "@logic/customer";
 
 describe("Find All Customers Use Case Test", function () {
   const repo = new TestCustomerRepository();
-  const data = "123456";
   const respData: any = [];
 
   const findAllMock = jest.spyOn(repo, "findAll");

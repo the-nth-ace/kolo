@@ -1,11 +1,8 @@
 import { DbContext } from "@data-layer/DbContext";
-import { ICustomer } from "@data-layer/customer/customer.model";
-import { CreateCustomerRequestDTO } from "@logic/customer";
-import { Document } from "mongoose";
 
 export interface ICustomerRepository {
   dbContext: DbContext;
-  create(createCustomerDTO: CreateCustomerRequestDTO): any;
+  create(createCustomerDTO: any): any;
   update(id: any, updateCustomerDTO: any): any;
   delete(id: string): any;
   findAll(): any;

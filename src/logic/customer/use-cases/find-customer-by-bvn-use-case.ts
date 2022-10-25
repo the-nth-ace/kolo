@@ -8,7 +8,7 @@ export class FindCustomerByBvnUseCase implements IUseCase {
     private _customerRepo: ICustomerRepository,
     private bvn: string
   ) {}
-  async execute(): Promise<Document<ICustomer> | null> {
+  async execute(): Promise<ICustomer | null> {
     return await this._customerRepo.findByBVN(this.bvn);
   }
 }

@@ -1,21 +1,16 @@
 import "reflect-metadata";
-
-import { TestCustomerRepository } from "@data-layer/customer/customer.test.repository";
 import {
   CustomerAddressDTO,
   CustomerNameDTO,
-  UpdateCustomerRequestDTO,
-  UpdateCustomerUseCase,
+  DeleteCustomerUseCase,
 } from "@logic/customer";
+import { TestCustomerRepository } from "@data-layer/customer/customer.test.repository";
 import { CustomerStatus, CustomerType, ICustomer } from "@data-layer/customer";
 
-describe("Find Update Customer  Use Case Test", function () {
+describe("Find Delete Customer Use Case Test", function () {
   const repo = new TestCustomerRepository();
 
-  const id = "123456";
-  const data: UpdateCustomerRequestDTO = {
-    bvn: "123456789",
-  };
+  const data = "123456";
   let address: CustomerAddressDTO = {
     city: "",
     country: "",
@@ -43,34 +38,28 @@ describe("Find Update Customer  Use Case Test", function () {
   updateMock.mockImplementation(async (data: string) => {
     return Promise.resolve(respData);
   });
-  const useCase = new UpdateCustomerUseCase(repo, id, data);
+  const useCase = new DeleteCustomerUseCase(repo, data);
 
   it("Should be defined", () => {
     expect(useCase).toBeDefined();
   });
+
   it("Should have a _customerRepo property", () => {
     expect(useCase).toHaveProperty("_customerRepo");
   });
-
   it("Should have a id property", () => {
     expect(useCase).toHaveProperty("id");
   });
-
-  it("Should have an update request dto property", () => {
-    expect(useCase).toHaveProperty("updateCustomerRequestDTO");
-  });
-
   it("Should have an execute method", () => {
     expect(useCase.execute).toBeDefined();
   });
-
-  it("should call _customerRepo.update with dto when execute is called", async () => {
+  it("should call _customerRepo.update when execute is called", async () => {
     await useCase.execute();
-    expect(updateMock).toHaveBeenCalledWith(id, data);
+    expect(updateMock).toHaveBeenCalled();
   });
 
-  it("Should return a string Object when execute is called", async () => {
+  it("Should return a null when execute is called", async () => {
     const res = await useCase.execute();
-    expect(res).toEqual("success");
+    expect(res).toEqual(null);
   });
 });

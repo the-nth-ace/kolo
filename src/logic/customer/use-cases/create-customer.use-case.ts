@@ -9,7 +9,7 @@ export class CreateCustomerUseCase implements IUseCase {
     private _dto: CreateCustomerRequestDTO
   ) {}
 
-  async execute(): Promise<any> {
+  async execute(): Promise<string> {
     const user = await this._customerRepo.create(this._dto);
     if (user) return "Created customer successfully";
     throw new InternalServerError(

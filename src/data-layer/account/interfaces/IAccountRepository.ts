@@ -1,13 +1,12 @@
-import { IAccount } from "./account.interface";
-import { CreateAccountDTO } from "../../../logic/dtos/account/CreateAccountDTO";
+import { DbContext } from "@data-layer/DbContext";
 
 export interface IAccountRepository {
-  dbSource: any;
-  create(account: CreateAccountDTO): boolean;
-  find(): Array<IAccount>;
-  findOneByAccountNumber(id: string): IAccount;
-  findOneByBVN(bvn: string): IAccount;
-  findOneByNuban(nubanCode: string): IAccount;
-  update(id: string, account: Partial<IAccount>): boolean;
+  dbContext: DbContext;
+  create(createAccountRequestDTO: any): any;
+  findAll(): any;
+  findOneByAccountNumber(id: string): any;
+  findByBVN(bvn: string): any;
+  findOneByNuban(nubanCode: string): any;
+  update(id: string, updateAccountRequestDTO: any): any;
   delete(id: string): null;
 }

@@ -1,4 +1,4 @@
-import { TestCustomerRepository } from "@data-layer/customer/customer.test-repository";
+import { TestCustomerRepository } from "@data-layer/customer/customer.test.repository";
 import {
   CreateCustomerRequestDTO,
   CustomerAddressDTO,
@@ -23,7 +23,7 @@ describe("Test the Test Customer Repository", function () {
     customerType: CustomerType.INDIVIDUAL,
     dateOfBirth: new Date(),
     email: "",
-    identity: [],
+    identities: [],
     phone: "",
   };
 

@@ -5,5 +5,7 @@ declare namespace NodeJS {
     PORT: string;
     DB_URI: string;
     SECRET: string;
+    SERIAL_NUMBER_LENGTH: number;
+    BANK_CODE: string;
   }
 }
