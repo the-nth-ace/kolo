@@ -1,10 +1,14 @@
 import { ITransactionRepository } from "@data-layer/transaction/";
-import { CreateTransactionOutsideRequestDTO } from "@logic/transaction";
+import {
+  CreateTransactionOutsideRequestDTO,
+  UpdateTransactionRequestDTO,
+} from "@logic/transaction";
 
 export class TestTransactionRepository implements ITransactionRepository {
-  update(updateTransactionTTO: any) {
+  update(id: string, updateTransactionRequestDTO: UpdateTransactionRequestDTO) {
     throw new Error("Method not implemented.");
   }
+
   delete(id: string) {
     throw new Error("Method not implemented.");
   }
@@ -24,5 +28,9 @@ export class TestTransactionRepository implements ITransactionRepository {
     createMultipleTransactionDTO: Array<CreateTransactionOutsideRequestDTO>
   ): any {
     throw new Error("Method not implemented.");
+  }
+
+  findByAccountId(id: string) {
+    throw new Error("Method not implemented");
   }
 }

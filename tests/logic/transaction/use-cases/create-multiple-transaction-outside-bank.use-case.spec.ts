@@ -57,6 +57,6 @@ describe("Create Multiple Transaction Outside use case", () => {
   });
 
   it("should return string response", async () => {
-    expect(await useCase.execute()).toBe("1 Transaction Created Successfully;");
+    expect(await useCase.execute()).toBe("1 Transaction Created Successfully");
   });
 });

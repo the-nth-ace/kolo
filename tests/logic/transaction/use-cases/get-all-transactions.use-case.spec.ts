@@ -1,21 +1,20 @@
-import { BaseTransactionResponse } from "../../src/data-layer/transaction/interfaces/transaction-response.interface";
-import { TestTransactionRepository } from "../../src/data-layer/transaction/transaction.repository";
-import { GetAllTransactionsUseCase } from "@logic/useCases/transaction";
+import { FindAllTransactionsUseCase } from "@logic/transaction";
+import { TestTransactionRepository } from "@data-layer/transaction";
 
 describe("Get All transactions use case", () => {
   const repo = new TestTransactionRepository();
   const findAllMock = jest.spyOn(repo, "findAll");
 
-  findAllMock.mockImplementation(() => {
-    return new BaseTransactionResponse();
+  findAllMock.mockImplementation(async () => {
+    return Promise.resolve([]);
   });
-  const useCase = new GetAllTransactionsUseCase(repo);
+  const useCase = new FindAllTransactionsUseCase(repo);
 
   it("should be defined", () => {
     expect(useCase).toBeDefined();
   });
 
-  it("should have a _transactions repo", () => {
+  it("should have a _transactionRepo property", () => {
     expect(useCase).toHaveProperty("_transactionRepo");
   });
 
@@ -28,7 +27,7 @@ describe("Get All transactions use case", () => {
     expect(findAllMock).toHaveBeenCalled();
   });
 
-  it("should return response", () => {
-    expect(useCase.execute()).toBeInstanceOf(BaseTransactionResponse);
+  it("should return an array", async () => {
+    expect(await useCase.execute()).toStrictEqual([]);
   });
 });

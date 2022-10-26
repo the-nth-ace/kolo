@@ -10,56 +10,56 @@ import {
 export class UpdateTransactionRequestDTO {
   @IsOptional()
   @IsNumber()
-  amount: number;
+  amount?: number;
 
   @IsOptional()
   @IsString()
-  currency: string;
+  currency?: string;
 
   @IsOptional()
   @IsEnum(DebitCredit)
-  debitOrCredit: DebitCredit;
+  debitOrCredit?: DebitCredit;
 
   @IsOptional()
   @IsString()
   @Length(3, 100)
-  description: string;
+  description?: string;
 
   @IsOptional()
   @IsString()
   @Length(10, 10)
-  destinationAccount: string;
+  destinationAccount?: string;
 
   @IsOptional()
   @IsString()
   @Length(3, 100)
-  destinationAccountName: string;
+  destinationAccountName?: string;
 
   @IsOptional()
   @IsString()
   @Length(3, 3)
-  destinationBankCode: string;
+  destinationBankCode?: string;
 
   @IsOptional()
   @IsString()
   @Length(3, 3)
-  destinationCurrency: string;
+  destinationCurrency?: string;
 
   @IsOptional()
   @IsString()
   @Length(3, 100)
-  destinationNarration: string;
+  destinationNarration?: string;
 
   @IsOptional()
   @IsString()
-  sourceAccountID: string;
+  sourceAccountID?: string;
 
   @IsOptional()
   @IsString()
   @Length(3, 100)
-  sourceNarration: string;
+  sourceNarration?: string;
 
   @IsOptional()
   @IsEnum(TransactionType)
-  transactionType: TransactionType;
+  transactionType?: TransactionType;
 }

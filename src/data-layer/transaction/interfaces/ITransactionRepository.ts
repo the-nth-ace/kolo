@@ -1,10 +1,19 @@
-import { CreateTransactionOutsideRequestDTO } from "@logic/transaction";
+import {
+  CreateTransactionOutsideRequestDTO,
+  UpdateTransactionRequestDTO,
+} from "@logic/transaction";
 
 export interface ITransactionRepository {
-  update(updateTransactionTTO: any): any;
+  update(
+    id: string,
+    updateTransactionRequestDTO: UpdateTransactionRequestDTO
+  ): any;
   delete(id: string): any;
+
   findOne(id: string): any;
+
   findAll(): any;
+
   findLastN(n: number): any;
   createSingle(
     createSingleTransactionDTO: CreateTransactionOutsideRequestDTO
@@ -12,4 +21,5 @@ export interface ITransactionRepository {
   createMultiple(
     createMultipleTransactionDTO: Array<CreateTransactionOutsideRequestDTO>
   ): any;
+  findByAccountId(id: string): any;
 }
