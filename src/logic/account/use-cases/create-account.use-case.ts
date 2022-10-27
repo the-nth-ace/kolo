@@ -1,15 +1,14 @@
 import { IUseCase } from "@logic/lib/IUseCase";
-import { IAccountRepository } from "@data-layer/account/interfaces/IAccountRepository";
+import { IAccountRepository } from "@data-layer/account/";
+import "dotenv/config";
 import {
+  CreateAccountDTO,
+  CreateAccountRequestDTO,
   generateCheckDigit,
   generateNumberOfLengthN,
-} from "@logic/account/utils";
+} from "@logic/account";
 
-import "dotenv/config";
-
-import { CreateAccountDTO, CreateAccountRequestDTO } from "@logic/account";
-import { ICustomerRepository } from "@data-layer/customer";
-import { ICustomer } from "../../../data-layer/customer/customer.model";
+import { ICustomerRepository, ICustomer } from "@data-layer/customer";
 
 export class CreateAccountUseCase implements IUseCase {
   private serialNumberLength: any;

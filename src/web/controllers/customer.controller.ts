@@ -24,7 +24,6 @@ import {
 } from "@logic/customer";
 import { AllowedRoles } from "@web/middlwares/role.middleware";
 import { MongoUserRepository, UserRole } from "@data-layer/user";
-import { CreateAccountUseCase } from "@logic/account";
 
 @JsonController("/customer")
 @Service()

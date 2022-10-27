@@ -1,23 +1,28 @@
+import { AllowedRoles } from "@web/middlwares/role.middleware";
+import { MongoAccountRepository } from "@data-layer/account";
+import { MongoCustomerRepository } from "@data-layer/customer";
+import { Service } from "typedi";
+import { UserRole } from "@data-layer/user";
 import {
   Body,
+  Delete,
   Get,
   JsonController,
   Param,
+  Patch,
   Post,
   UseBefore,
 } from "routing-controllers";
-import { Service } from "typedi";
-import { MongoAccountRepository } from "@data-layer/account/account.mongo.respository";
 import {
   CreateAccountForCustomerRequestDTO,
   CreateAccountRequestDTO,
   CreateAccountUseCase,
   FindAccountByAccountNumberUseCase,
   FindAllAccountsUseCase,
+  DeleteAccountUseCase,
+  UpdateAccountRequestDTO,
+  UpdateAccountUseCase,
 } from "@logic/account";
-import { UserRole } from "@data-layer/user";
-import { AllowedRoles } from "@web/middlwares/role.middleware";
-import { MongoCustomerRepository } from "@data-layer/customer";
 
 @JsonController("/account")
 @Service()
@@ -52,13 +57,45 @@ export class AccountController {
     return await useCase.execute();
   }
 
-  @Get("/:accountNumber")
+  @Get("/acctNumber/:accountNumber")
   async getAccountByAccountNumber(
     @Param("accountNumber") accountNumber: string
   ) {
     const useCase = new FindAccountByAccountNumberUseCase(
       this._accountRepo,
       accountNumber
+    );
+    return await useCase.execute();
+  }
+
+  // TODO Find Account By Id UseCase
+  // FIXME
+  // @Get("/:id")
+  // async getAccountByAccountNumber(
+  //   @Param("id") id: string
+  // ) {
+  //   const useCase = new FindAccountByI(
+  //     this._accountRepo,
+  //     accountNumber
+  //   );
+  //   return await useCase.execute();
+  // }
+
+  @Delete("/:id")
+  async deleteAccount(@Param("id") id: string) {
+    const useCase = new DeleteAccountUseCase(this._accountRepo, id);
+    return await useCase.execute();
+  }
+
+  @Patch("/:id")
+  async updateAccout(
+    @Param("id") id: string,
+    @Body() updateAccountDTO: UpdateAccountRequestDTO
+  ) {
+    const useCase = new UpdateAccountUseCase(
+      this._accountRepo,
+      id,
+      updateAccountDTO
     );
     return await useCase.execute();
   }
