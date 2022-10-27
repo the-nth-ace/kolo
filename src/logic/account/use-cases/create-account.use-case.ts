@@ -6,47 +6,63 @@ import {
 } from "@logic/account/utils";
 
 import "dotenv/config";
-import { InternalServerError } from "routing-controllers";
-import { CreateAccountRequestDTO } from "@logic/account";
+
+import { CreateAccountDTO, CreateAccountRequestDTO } from "@logic/account";
+import { ICustomerRepository } from "@data-layer/customer";
+import { ICustomer } from "../../../data-layer/customer/customer.model";
 
 export class CreateAccountUseCase implements IUseCase {
-  private serialNumberLength = process.env.SERIAL_NUMBER_LENGTH;
+  private serialNumberLength: any;
   private bankCode = process.env.BANK_CODE;
 
   constructor(
     private _accountRepo: IAccountRepository,
+    private _customerRepo: ICustomerRepository,
     private createAccountRequestDTO: CreateAccountRequestDTO
-  ) {}
+  ) {
+    this.serialNumberLength = process.env.SERIAL_NUMBER_LENGTH;
+    this.serialNumberLength = parseInt(this.serialNumberLength);
+  }
 
   async execute(): Promise<any> {
-    const acctNum = this.generateAccountNumber();
-    const createAccountDTO = {
+    const customerId = this.createAccountRequestDTO.customerId;
+    const customer: ICustomer = await this._customerRepo.findById(customerId);
+    const acctNum = await this.generateAccountNumber();
+    const createAccountDTO: CreateAccountDTO = {
       ...this.createAccountRequestDTO,
       accountNumber: acctNum,
+      nubanCode: acctNum.substring(1, 9),
     };
-    const acct = await this._accountRepo.create(createAccountDTO);
-    if (acct) return "Created account successfully";
-    throw new InternalServerError(
-      "Something went wrong while creating account"
-    );
+    await this._accountRepo.create(createAccountDTO);
+
+    await this._customerRepo.update(customerId, {
+      numberOfAccounts: customer.numberOfAccounts + 1,
+    });
+
+    return "Created account successfully";
   }
-  private generateAccountNumber() {
-    const nubanSerial = this.generateNubanSerial();
+  private async generateAccountNumber() {
+    const nubanSerial = await this.generateNubanSerial();
+
     const checkDigit = generateCheckDigit({
       bankCode: this.bankCode,
       nubanSerial,
     });
     return `${nubanSerial}${checkDigit}`;
   }
-  private generateNubanSerial() {
+  private async generateNubanSerial() {
     let nubanCandidate: string = "";
 
     while (true) {
+      console.log(nubanCandidate);
       nubanCandidate = generateNumberOfLengthN(
         this.serialNumberLength
       ).toString();
-      const acct = this._accountRepo.findOneByNuban(nubanCandidate);
-      if (acct == null) break;
+      try {
+        await this._accountRepo.findOneByNuban(nubanCandidate);
+      } catch (err) {
+        break;
+      }
     }
     return nubanCandidate;
   }

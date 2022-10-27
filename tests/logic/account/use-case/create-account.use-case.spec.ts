@@ -2,9 +2,11 @@ import "reflect-metadata";
 import { TestAccountRepository } from "@data-layer/account/account.test.repository";
 import { CreateAccountRequestDTO, CreateAccountUseCase } from "@logic/account";
 import { AccountType } from "@data-layer/account/enums/account-type.enum";
+import { TestCustomerRepository } from "@data-layer/customer";
 
 describe("Create Account Use Case Test", function () {
   const repo = new TestAccountRepository();
+  const customerRepo = new TestCustomerRepository();
 
   const data: CreateAccountRequestDTO = {
     accountName: "",
@@ -19,10 +21,15 @@ describe("Create Account Use Case Test", function () {
     return "any";
   });
 
+  const customerRepoMOck = jest.spyOn(customerRepo, "findById");
+  customerRepoMOck.mockImplementation(async (id: string) => {
+    Promise.resolve(true);
+  });
+
   findByNubanMock.mockImplementation((id: any) => {
     return null;
   });
-  const useCase = new CreateAccountUseCase(repo, data);
+  const useCase = new CreateAccountUseCase(repo, customerRepo, data);
 
   it("Should be defined", () => {
     expect(useCase).toBeDefined();

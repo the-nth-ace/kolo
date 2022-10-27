@@ -3,6 +3,7 @@ import {
   CreateTransactionOutsideRequestDTO,
   UpdateTransactionRequestDTO,
 } from "@logic/transaction";
+import { DbContext } from "@data-layer/DbContext";
 
 export class TestTransactionRepository implements ITransactionRepository {
   update(id: string, updateTransactionRequestDTO: UpdateTransactionRequestDTO) {
@@ -33,4 +34,6 @@ export class TestTransactionRepository implements ITransactionRepository {
   findByAccountId(id: string) {
     throw new Error("Method not implemented");
   }
+
+  dbContext: DbContext;
 }

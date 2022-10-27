@@ -1,9 +1,8 @@
 import { Get, JsonController, UseBefore } from "routing-controllers";
 import { Service } from "typedi";
-import { GenericSuccessResponse } from "../../logic/reponses/GenericSuccessResponse";
+import { GenericSuccessResponse } from "@logic/reponses";
 import { AllowedRoles } from "../middlwares/role.middleware";
-import { UserRole } from "../../data-layer/user/user.entity";
-import { Role } from "../../data-layer/user/role.model";
+import { UserRole } from "@data-layer/user/enums/user.role.enum";
 
 @JsonController()
 @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))

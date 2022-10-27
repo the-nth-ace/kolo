@@ -1,4 +1,5 @@
 export * from "./change-user-password.use-case";
+export * from "./create-user.use-case";
 export * from "./deativate-user.use-case";
 export * from "./login-user.use-case";
 export * from "./send-confirmation-email.use-case";

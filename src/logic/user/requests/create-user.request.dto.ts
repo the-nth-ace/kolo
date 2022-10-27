@@ -1,6 +1,7 @@
 import { IsArray, IsEmail, IsString } from "class-validator";
+import { UserRole } from "@data-layer/user";
 
-export class CreateUserDTO {
+export class CreateUserRequestDTO {
   @IsEmail()
   email: string;
 
@@ -15,5 +16,5 @@ export class CreateUserDTO {
 
   @IsArray()
   @IsString({ each: true })
-  roles: Array<string>;
+  roles: Array<UserRole>;
 }

@@ -19,6 +19,7 @@ import {
 } from "@logic/customer";
 
 export class UpdateCustomerRequestDTO {
+  @IsOptional()
   @IsString()
   @Length(10, 10)
   bvn?: string;

@@ -1,10 +1,10 @@
-import { LoginUserUseCase } from "@logic/useCases/user";
-import { TestUserRepository } from "../../src/data-layer/user/test-user.repository";
-import { LoginDTO } from "@logic/dtos/user";
+import { LoginUserUseCase } from "@logic/user/use-cases";
+import { TestUserRepository } from "@data-layer/user/test-user.repository";
+import { LoginUserRequestDTO } from "@logic/user";
 
 describe("Login User Use Case", () => {
   const repo = new TestUserRepository();
-  const dto: LoginDTO = { email: "", password: "" };
+  const dto: LoginUserRequestDTO = { email: "", password: "" };
   const useCase = new LoginUserUseCase(repo, dto);
   it("should be defined", function () {
     expect(useCase).toBeDefined();

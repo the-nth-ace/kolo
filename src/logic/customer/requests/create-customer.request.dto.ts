@@ -16,6 +16,7 @@ import {
   ValidateNested,
   IsOptional,
   Min,
+  IsArray,
 } from "class-validator";
 import { Type } from "class-transformer";
 
@@ -91,9 +92,7 @@ export class CreateCustomerRequestDTO {
   @IsEmail()
   email: string;
 
-  @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
+  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CustomerIdentityDTO)
   identities: Array<CustomerIdentityDTO>;

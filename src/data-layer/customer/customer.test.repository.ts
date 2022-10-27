@@ -28,7 +28,7 @@ export class TestCustomerRepository implements ICustomerRepository {
     throw new Error("Method not implemented");
   }
 
-  findById(id: string): Promise<ICustomer | null> {
+  findById(id: string): any {
     throw new Error("Method not implemented");
   }
 

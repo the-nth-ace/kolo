@@ -2,8 +2,10 @@ import {
   CreateTransactionOutsideRequestDTO,
   UpdateTransactionRequestDTO,
 } from "@logic/transaction";
+import { DbContext } from "@data-layer/DbContext";
 
 export interface ITransactionRepository {
+  dbContext: DbContext;
   update(
     id: string,
     updateTransactionRequestDTO: UpdateTransactionRequestDTO

@@ -1,6 +1,6 @@
 import { DbContext } from "../DbContext";
-import { CreateUserDTO } from "@logic/dtos/user/create-user.dto";
-import { IUserRepository } from "./interfaces/user-repository.interface";
+import { CreateUserDTO } from "@logic/user/";
+import { IUserRepository } from "@data-layer/user/interfaces";
 import { IUser } from "./user.model";
 
 export class TestUserRepository implements IUserRepository {
@@ -11,9 +11,7 @@ export class TestUserRepository implements IUserRepository {
     throw new Error("Method not implemented.");
   }
   dbContext: DbContext;
-  signupUser(dto: Partial<IUser>): any {
-    throw new Error("Method not implemented.");
-  }
+
   findUserById(id: string) {
     throw new Error("Method not implemented.");
   }

@@ -5,7 +5,6 @@ export class SignUpUserRequestDTO {
   email: string;
 
   @IsString()
-  @Length(10, 50)
   password: string;
 
   @IsString()

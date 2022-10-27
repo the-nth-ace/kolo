@@ -25,7 +25,7 @@ describe("Find Customer By ID Use Case Test", function () {
     customerType: CustomerType.INDIVIDUAL,
     dateOfBirth: new Date(),
     email: "",
-    identity: [],
+    identities: [],
     phone: "",
   };
 

@@ -1,7 +1,6 @@
-import { MongoUserRepository } from "../../data-layer/user/user.repository.mongo";
-import { LoginDTO } from "@logic/dtos/user/login-user.dto";
-import { SignUpUserRequestDTO } from "@logic/dtos/user/signup-user-request.dto";
-import { LoginUserUseCase, SignUpUserUseCase } from "@logic/useCases/user";
+import { MongoUserRepository } from "@data-layer/user";
+import { SignUpUserRequestDTO, LoginUserRequestDTO } from "@logic/user/";
+import { LoginUserUseCase, SignUpUserUseCase } from "@logic/user/use-cases";
 import { Body, HttpCode, JsonController, Post } from "routing-controllers";
 import { Service } from "typedi";
 
@@ -11,7 +10,7 @@ export class AuthController {
   public constructor(private readonly _userRepo: MongoUserRepository) {}
 
   @Post("/login")
-  async login(@Body() loginDTo: LoginDTO) {
+  async login(@Body() loginDTo: LoginUserRequestDTO) {
     const useCase = new LoginUserUseCase(this._userRepo, loginDTo);
     return await useCase.execute();
   }

@@ -4,3 +4,4 @@ export * from "./find-all-customers.use-case";
 export * from "./find-customer-by-bvn-use-case";
 export * from "./find-customer-by-id.use-case";
 export * from "./update-customer.use-case";
+export * from "./create-customer-for-user.use-case";

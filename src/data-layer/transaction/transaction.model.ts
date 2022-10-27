@@ -8,7 +8,6 @@ import {
 export interface ITransaction {
   _id: string;
   amount: number;
-
   currency: string;
   sourceAccount: any;
   debitOrCredit: DebitCredit;
@@ -27,7 +26,7 @@ export interface ITransaction {
   valueDate: Date;
 }
 
-const TransactionSchema = new mongoose.Schema({
+export const TransactionSchema = new mongoose.Schema({
   amount: {
     type: Number,
     required: true,

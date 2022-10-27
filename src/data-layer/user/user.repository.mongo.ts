@@ -1,23 +1,22 @@
 import { DbContext } from "../DbContext";
-import { CreateUserDTO } from "@logic/dtos/user/create-user.dto";
-import { Service } from "typedi";
-import { IUserRepository } from "./interfaces/user-repository.interface";
+import { CreateUserDTO } from "@logic/user/";
+import { Container, Service } from "typedi";
+import { IUserRepository } from "@data-layer/user/interfaces";
 import { IUser } from "./user.model";
 
 @Service()
 export class MongoUserRepository implements IUserRepository {
-  constructor(public dbContext: DbContext) {}
-  createUser(dto: CreateUserDTO) {
-    throw new Error("Method not implemented.");
+  dbContext: DbContext;
+  constructor() {
+    this.dbContext = Container.get(DbContext);
   }
 
   async findUserByEmail(email: string): Promise<IUser | null> {
-    const user = await this.dbContext.user.findOne({
+    return this.dbContext.user.findOne({
       email: email,
     });
-    return user;
   }
-  async signupUser(dto: Partial<IUser>): Promise<any> {
+  async createUser(dto: CreateUserDTO): Promise<any> {
     return await this.dbContext.user.create(dto);
   }
 
@@ -25,7 +24,7 @@ export class MongoUserRepository implements IUserRepository {
     return this.dbContext.user.findById(id);
   }
   async updateUser(id: IUser["_id"], payload: Partial<IUser>) {
-    return this.dbContext.user.findByIdAndUpdate(id, payload);
+    return await this.dbContext.user.findByIdAndUpdate(id, payload).exec();
   }
   async findAllUsers() {
     return this.dbContext.user.find();

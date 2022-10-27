@@ -1,20 +1,17 @@
-import { IUserRepository } from "../../../data-layer/user/interfaces/user-repository.interface";
-import { LoginDTO } from "@logic/dtos/user/login-user.dto";
+import { IUser, IUserRepository } from "@data-layer/user";
+import { LoginUserRequestDTO } from "@logic/user/";
 import { Service } from "typedi";
 import bcrypt from "bcrypt";
-import {
-  GenericFailureResponse,
-  GenericSuccessResponse,
-} from "@logic/reponses";
-import { ResponseType } from "@logic/reponses/ResponseType.enum";
 import jwt from "jsonwebtoken";
-import { IUser } from "../../../data-layer/user/user.model";
 import { BadRequestError } from "routing-controllers";
 
 @Service()
 export class LoginUserUseCase {
   secret = process.env.SECRET;
-  constructor(private _userRepo: IUserRepository, private dto: LoginDTO) {}
+  constructor(
+    private _userRepo: IUserRepository,
+    private dto: LoginUserRequestDTO
+  ) {}
   async execute() {
     const foundUser: IUser | null = await this._userRepo.findUserByEmail(
       this.dto.email
@@ -30,15 +27,13 @@ export class LoginUserUseCase {
     if (isMatch) {
       const token = await this.signUser(foundUser);
 
-      const data = {
+      return {
         user: {
           id: foundUser._id.toString(),
           email: foundUser.email,
         },
         token: token,
       };
-
-      return data;
     }
     throw new BadRequestError("check your email and password");
   }

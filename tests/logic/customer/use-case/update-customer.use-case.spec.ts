@@ -35,7 +35,7 @@ describe("Find Update Customer  Use Case Test", function () {
     customerType: CustomerType.INDIVIDUAL,
     dateOfBirth: new Date(),
     email: "",
-    identity: [],
+    identities: [],
     phone: "",
   };
 

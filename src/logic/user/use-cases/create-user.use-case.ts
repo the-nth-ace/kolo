@@ -1,10 +1,13 @@
 import { IUserRepository } from "@data-layer/user/interfaces/user-repository.interface";
-import { CreateUserDTO } from "../../dtos/user/create-user.dto";
 import { BadRequestError, InternalServerError } from "routing-controllers";
+import { CreateUserRequestDTO } from "@logic/user";
 
 // TODO Refactor
 export class CreateUserUseCase {
-  constructor(private _userRepo: IUserRepository, private dto: CreateUserDTO) {}
+  constructor(
+    private _userRepo: IUserRepository,
+    private dto: CreateUserRequestDTO
+  ) {}
 
   async execute() {
     const User = this._userRepo.dbContext.user;
@@ -23,6 +26,7 @@ export class CreateUserUseCase {
 
     if (roles.length == 0)
       throw new BadRequestError("Check your requests data-layer");
+
     const newUser = new User({
       email: this.dto.email,
       passwordHash: this.dto.password,

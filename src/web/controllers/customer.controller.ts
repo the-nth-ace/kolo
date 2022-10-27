@@ -1,34 +1,38 @@
 import {
   Body,
+  Delete,
   Get,
   JsonController,
   Param,
-  Post,
-  UseBefore,
   Patch,
-  Delete,
+  Post,
+  Req,
+  UseBefore,
 } from "routing-controllers";
 import { Service } from "typedi";
 import { MongoCustomerRepository } from "@data-layer/customer";
 import {
+  CreateCustomerForUserUseCase,
   CreateCustomerRequestDTO,
-  UpdateCustomerRequestDTO,
-} from "@logic/customer";
-import {
   CreateCustomerUseCase,
+  DeleteCustomerUseCase,
   FindAllCustomersUseCase,
   FindCustomerByBvnUseCase,
   FindCustomerByIdUseCase,
+  UpdateCustomerRequestDTO,
   UpdateCustomerUseCase,
-  DeleteCustomerUseCase,
 } from "@logic/customer";
 import { AllowedRoles } from "@web/middlwares/role.middleware";
-import { UserRole } from "@data-layer/user/user.entity";
+import { MongoUserRepository, UserRole } from "@data-layer/user";
+import { CreateAccountUseCase } from "@logic/account";
 
 @JsonController("/customer")
 @Service()
 export class CustomerController {
-  public constructor(private readonly _customerRepo: MongoCustomerRepository) {}
+  public constructor(
+    private readonly _customerRepo: MongoCustomerRepository,
+    private readonly _userRepo: MongoUserRepository
+  ) {}
 
   @Get("/")
   async getAllCustomer() {
@@ -72,6 +76,22 @@ export class CustomerController {
     const useCase = new CreateCustomerUseCase(
       this._customerRepo,
       createCustomerDTO
+    );
+    return await useCase.execute();
+  }
+
+  @Post("/user")
+  @UseBefore(AllowedRoles([UserRole.USER]))
+  async createCustomerForUser(
+    @Body() createCustomerRequestDTO: CreateCustomerRequestDTO,
+    @Req() request: any
+  ) {
+    const userId = request.user._id;
+    const useCase = new CreateCustomerForUserUseCase(
+      this._customerRepo,
+      this._userRepo,
+      userId,
+      createCustomerRequestDTO
     );
     return await useCase.execute();
   }

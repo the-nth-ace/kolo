@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import { IRole } from "./role.model";
+import { CustomerSchema } from "@data-layer/customer";
 
 const saltRounds = 8;
 
@@ -12,6 +12,7 @@ export interface IUser {
   lastName: string;
   roles: any[];
   createdAt: Date;
+  customerId?: any;
   updatedAt?: Date | undefined;
   token?: string | undefined;
   expiresOn?: string | undefined;
@@ -65,6 +66,11 @@ export const UserSchema = new mongoose.Schema({
       ref: "Role",
     },
   ],
+  customerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Customer",
+    required: false,
+  },
 });
 
 UserSchema.pre("save", async function (next) {

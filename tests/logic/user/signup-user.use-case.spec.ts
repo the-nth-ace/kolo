@@ -1,7 +1,5 @@
-import { TestUserRepository } from "../../src/data-layer/user/test-user.repository";
-import { SignUpUserRequestDTO } from "@logic/dtos/user/signup-user-request.dto";
-import { BaseResponse } from "@logic/reponses/BaseResponse";
-import { SignUpUserUseCase } from "@logic/useCases/user";
+import { TestUserRepository } from "@data-layer/user";
+import { SignUpUserRequestDTO, SignUpUserUseCase } from "@logic/user";
 
 describe("SignUp User use case", () => {
   const repo = new TestUserRepository();
@@ -47,6 +45,6 @@ describe("SignUp User use case", () => {
   });
 
   it("should return response", async () => {
-    expect(await useCase.execute()).toBeInstanceOf(BaseResponse);
+    expect(await useCase.execute()).toBe("Signup Successful");
   });
 });

@@ -22,7 +22,8 @@ export interface ICustomer {
   startDateOfRelationship: Date;
   status: CustomerStatus;
   customerAddress: ICustomerAddress;
-  identity: Array<ICustomerIdentity>;
+  identities: Array<ICustomerIdentity>;
+  accounts?: Array<any>;
 }
 
 export const CustomerSchema = new mongoose.Schema(
@@ -60,7 +61,7 @@ export const CustomerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    numberOfAccount: {
+    numberOfAccounts: {
       type: Number,
       default: 0,
     },
@@ -102,7 +103,7 @@ export const CustomerSchema = new mongoose.Schema(
       },
       required: false,
     },
-    identity: {
+    identities: {
       type: [
         {
           idNumber: {
@@ -126,16 +127,21 @@ export const CustomerSchema = new mongoose.Schema(
       ],
       required: false,
     },
+    accounts: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Account",
+      },
+    ],
   },
   {
     toObject: {
       transform: function (doc, ret) {
         ret.id = ret._id.toString();
-        ret.customerName.id = ret.customerName._id.toString();
         delete ret.customerName._id;
+        delete ret.customerAddress._id;
 
-        for (let identity of ret.identity) {
-          identity.id = identity._id.toString();
+        for (let identity of ret.identities) {
           delete identity._id;
         }
 
