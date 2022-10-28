@@ -16,9 +16,6 @@ export class UpdateAccountRequestDTO {
   @IsString()
   currency?: string;
 
-  @IsString()
-  customerId?: string;
-
   @IsOptional()
   @IsEnum(EntityStatus)
   status?: EntityStatus;

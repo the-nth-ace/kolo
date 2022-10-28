@@ -2,7 +2,7 @@ import { IUseCase } from "@logic/lib";
 import { ITransactionRepository } from "@data-layer/transaction";
 import { TransferFundsOutsideRequestDTO } from "@logic/account";
 import { CreateTransactionOutsideRequestDTO } from "@logic/transaction";
-import { IAccountRepository } from "../../../data-layer/account/interfaces/IAccountRepository";
+import { IAccountRepository } from "@data-layer/account";
 
 export class TransferFundsFromAccountOutsideBankUseCase implements IUseCase {
   constructor(

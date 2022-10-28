@@ -2,6 +2,7 @@ import {
   Body,
   Delete,
   Get,
+  HttpCode,
   JsonController,
   Param,
   Patch,
@@ -34,17 +35,20 @@ export class CustomerController {
   ) {}
 
   @Get("/")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   async getAllCustomer() {
     const useCase = new FindAllCustomersUseCase(this._customerRepo);
     return await useCase.execute();
   }
   @Get("/:id")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   async getOneCustomerById(@Param("id") id: string) {
     const useCase = new FindCustomerByIdUseCase(this._customerRepo, id);
     return await useCase.execute();
   }
 
   @Patch("/:id")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   async updateCustomerById(
     @Param("id") id: string,
     @Body() updateDTO: UpdateCustomerRequestDTO
@@ -58,18 +62,22 @@ export class CustomerController {
   }
 
   @Delete("/:id")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
+  @HttpCode(204)
   async deleteCustomerById(@Param("id") id: string) {
     const useCase = new DeleteCustomerUseCase(this._customerRepo, id);
     return await useCase.execute();
   }
 
   @Get("/bvn/:bvn")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   async getOneCustomerByBvn(@Param("bvn") bvn: string) {
     const useCase = new FindCustomerByBvnUseCase(this._customerRepo, bvn);
     return await useCase.execute();
   }
 
   @Post("/")
+  @HttpCode(201)
   @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   async addCustomer(@Body() createCustomerDTO: CreateCustomerRequestDTO) {
     const useCase = new CreateCustomerUseCase(
@@ -80,6 +88,7 @@ export class CustomerController {
   }
 
   @Post("/user")
+  @HttpCode(201)
   @UseBefore(AllowedRoles([UserRole.USER]))
   async createCustomerForUser(
     @Body() createCustomerRequestDTO: CreateCustomerRequestDTO,

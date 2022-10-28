@@ -6,3 +6,4 @@ export * from "./delete-account.use-case";
 export * from "./update-account.use-case";
 export * from "./transfer-funds-from-account-within-bank.use-case";
 export * from "./transfer-funds-from-account-outside-bank.use-case";
+export * from "./find-account-by-id.use-case";

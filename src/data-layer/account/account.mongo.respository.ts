@@ -19,7 +19,7 @@ export class MongoAccountRepository implements IAccountRepository {
   async findOneById(id: string): Promise<IAccount> {
     const acct = await this.dbContext.account.findById(id).exec();
     if (!acct) throw new NotFoundError("Account was not found");
-    return acct;
+    return acct.toObject();
   }
 
   async create(createAccountRequestDTO: CreateAccountDTO): Promise<any> {

@@ -9,9 +9,7 @@ export class UpdateAccountUseCase implements IUseCase {
     private updateAccountRequestDTO: UpdateAccountRequestDTO
   ) {}
   async execute(): Promise<any> {
-    return await this._accountRepo.update(
-      this.id,
-      this.updateAccountRequestDTO
-    );
+    await this._accountRepo.update(this.id, this.updateAccountRequestDTO);
+    return null;
   }
 }

@@ -3,34 +3,33 @@ import { MongoAccountRepository } from "@data-layer/account";
 import { MongoCustomerRepository } from "@data-layer/customer";
 import { Service } from "typedi";
 import { UserRole } from "@data-layer/user";
-import { FindTransactionsByAccountUseCase } from "../../logic/transaction/use-cases/find-transactions-by-account.use-case";
-import { MongoTransactionRepository } from "../../data-layer/transaction/transaction.mongo.repository";
-import { CreateSingleTransactionWithinUseCase } from "../../logic/transaction/use-cases/create-single-transaction-within.use-case";
-import { CreateTransactionWithinRequestDTO } from "../../logic/transaction/requests/create-transaction-within-request.dto";
-import { TransferFundsFromAccountWithinBankUseCase } from "../../logic/account/use-cases/transfer-funds-from-account-within-bank.use-case";
-import { TransferFundsOutsideRequestDTO } from "../../logic/account/requests/transfer-funds-outside-request.dto";
-import { TransferFundsFromAccountOutsideBankUseCase } from "../../logic/account/use-cases/transfer-funds-from-account-outside-bank.use-case";
+import { FindTransactionsByAccountUseCase } from "@logic/transaction";
+import { MongoTransactionRepository } from "@data-layer/transaction";
+import { User } from "../../data-layer/user/user.model";
 import {
-  Body,
-  Delete,
-  Get,
-  JsonController,
-  Param,
-  Patch,
-  Post,
-  UseBefore,
-} from "routing-controllers";
-import {
-  CreateAccountForCustomerRequestDTO,
-  CreateAccountRequestDTO,
-  CreateAccountUseCase,
+  TransferFundsFromAccountWithinBankUseCase,
+  TransferFundsOutsideRequestDTO,
+  TransferFundsFromAccountOutsideBankUseCase,
   FindAccountByAccountNumberUseCase,
   FindAllAccountsUseCase,
   DeleteAccountUseCase,
   UpdateAccountRequestDTO,
   UpdateAccountUseCase,
   TransferFundsWithinRequestDTO,
-} from "@logic/account";
+  FindAccountByIdUseCase,
+} from "@logic/account/";
+
+import {
+  Body,
+  Delete,
+  Get,
+  HttpCode,
+  JsonController,
+  Param,
+  Patch,
+  Post,
+  UseBefore,
+} from "routing-controllers";
 
 @JsonController("/accounts")
 @Service()
@@ -48,26 +47,8 @@ export class AccountController {
     return await useCase.execute();
   }
 
-  // FIXME Should be a customer route
-  @Post("/customer/:id/")
-  @UseBefore(AllowedRoles([UserRole.USER]))
-  async createAccountForCustomer(
-    @Body() createAccountRequest: CreateAccountForCustomerRequestDTO,
-    @Param("id") id: string
-  ) {
-    const dto: CreateAccountRequestDTO = {
-      ...createAccountRequest,
-      customerId: id,
-    };
-    const useCase = new CreateAccountUseCase(
-      this._accountRepo,
-      this._customerRepo,
-      dto
-    );
-    return await useCase.execute();
-  }
-
   @Get("/acctNumber/:accountNumber")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   async getAccountByAccountNumber(
     @Param("accountNumber") accountNumber: string
   ) {
@@ -78,26 +59,25 @@ export class AccountController {
     return await useCase.execute();
   }
 
-  // TODO Find Account By Id UseCase
-  // FIXME
-  // @Get("/:id")
-  // async getAccountByAccountNumber(
-  //   @Param("id") id: string
-  // ) {
-  //   const useCase = new FindAccountByI(
-  //     this._accountRepo,
-  //     accountNumber
-  //   );
-  //   return await useCase.execute();
-  // }
+  @Get("/:id")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
+  async getAccountById(@Param("id") id: string) {
+    console.log(id);
+    const useCase = new FindAccountByIdUseCase(this._accountRepo, id);
+    return await useCase.execute();
+  }
 
   @Delete("/:id")
+  @HttpCode(204)
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   async deleteAccount(@Param("id") id: string) {
     const useCase = new DeleteAccountUseCase(this._accountRepo, id);
     return await useCase.execute();
   }
 
   @Patch("/:id")
+  @HttpCode(200)
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   async updateAccout(
     @Param("id") id: string,
     @Body() updateAccountDTO: UpdateAccountRequestDTO
@@ -111,6 +91,7 @@ export class AccountController {
   }
 
   @Get("/:id/transactions/")
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   async getAccountTransaction(@Param("id") id: string) {
     const useCase = new FindTransactionsByAccountUseCase(
       this._transactionRepo,
@@ -120,6 +101,8 @@ export class AccountController {
   }
 
   @Post("/:id/transfer/")
+  @HttpCode(201)
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   async transferFromAccountWithin(
     @Param("id") id: string,
     @Body() transferFundsRequest: TransferFundsWithinRequestDTO
@@ -135,6 +118,8 @@ export class AccountController {
   }
 
   @Post("/:id/transfer/outside/")
+  @HttpCode(201)
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   async transferFromAccountOutside(
     @Param("id") id: string,
     @Body() transferFundsRequest: TransferFundsOutsideRequestDTO
@@ -144,32 +129,6 @@ export class AccountController {
       this._accountRepo,
       id,
       transferFundsRequest
-    );
-
-    return await useCase.execute();
-  }
-
-  @Post("/:id/transactions/")
-  async createSingleTransactionWithinFromAccount(
-    @Param("id") id: string,
-    @Body() createTransactionWithinRequest: CreateTransactionWithinRequestDTO
-  ) {
-    const useCase = new CreateSingleTransactionWithinUseCase(
-      this._transactionRepo,
-      createTransactionWithinRequest
-    );
-
-    return await useCase.execute();
-  }
-
-  @Post("/:id/transactions/outside/")
-  async createSingleTransactionOutsideFromAccount(
-    @Param("id") id: string,
-    @Body() createTransactionWithinRequest: CreateTransactionWithinRequestDTO
-  ) {
-    const useCase = new CreateSingleTransactionWithinUseCase(
-      this._transactionRepo,
-      createTransactionWithinRequest
     );
 
     return await useCase.execute();

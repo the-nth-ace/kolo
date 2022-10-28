@@ -5,33 +5,33 @@ import {
   JsonController,
   Param,
   Patch,
-  Post,
+  UseBefore,
 } from "routing-controllers";
 import { Service } from "typedi";
 import { MongoTransactionRepository } from "@data-layer/transaction/transaction.mongo.repository";
-import { CreateSingleTransactionOutsideUseCase } from "../../logic/transaction/use-cases/create-single-transaction-outside.use-case";
-import { CreateTransactionOutsideRequestDTO } from "../../logic/transaction/requests/create-transaction-outside-request.dto";
 import { UpdateTransactionUseCase } from "../../logic/transaction/use-cases/update-transaction.use-case";
 import { UpdateTransactionRequestDTO } from "../../logic/transaction/requests/update-transaction-request.dto";
 import { DeleteTransactionUseCase } from "../../logic/transaction/use-cases/delete-transaction.use-case";
 import {
-  CreateSingleTransactionWithinUseCase,
-  CreateTransactionWithinRequestDTO,
   FindAllTransactionsUseCase,
   FindTransactionByIdUseCase,
 } from "@logic/transaction";
+import { AllowedRoles } from "@web/middlwares/role.middleware";
+import { UserRole } from "@data-layer/user";
 
 @JsonController("/transactions")
 @Service()
 export class TransactionController {
   private constructor(private _transactionRepo: MongoTransactionRepository) {}
 
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   @Get("/")
   async getAllTransactions() {
     const useCase = new FindAllTransactionsUseCase(this._transactionRepo);
     return await useCase.execute();
   }
 
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   @Patch("/:id")
   async updateTransaction(
     @Param("id") id: string,
