@@ -6,7 +6,7 @@
 
 Using Typescript and ExpressJs as the language and  framework respectively, I implemented clean architecture as I understood it at the time of development,  *making sure logic depended on data and adapters on logic.* Unit and integration tests were written in jest and <> respectively and the current test coverage is in the shields above. Authentication was implemented with JWT.
 
-**What <> is not:** As far as I know, Kolo is not production ready as there would be considerations to be made for more extensive tests, and its ability to scale. Integration of third party apis for authentication, identity verification, payments etc need to be reconsidered.
+**What Kolo is not:** As far as I know, Kolo is not production ready as there would be considerations to be made for more extensive tests, and its ability to scale. Integration of third party apis for authentication, identity verification, payments etc need to be reconsidered.
 
 ## 🚂 Tech Stack
 
