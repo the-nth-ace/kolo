@@ -26,17 +26,13 @@ export class CreateAccountUseCase implements IUseCase {
   async execute(): Promise<any> {
     const customerId = this.createAccountRequestDTO.customerId;
     const customer: ICustomer = await this._customerRepo.findById(customerId);
-    const acctNum = await this.generateAccountNumber();
+    const acctNum: string = await this.generateAccountNumber();
     const createAccountDTO: CreateAccountDTO = {
       ...this.createAccountRequestDTO,
       accountNumber: acctNum,
       nubanCode: acctNum.substring(1, 9),
     };
     await this._accountRepo.create(createAccountDTO);
-
-    await this._customerRepo.update(customerId, {
-      numberOfAccounts: customer.numberOfAccounts + 1,
-    });
 
     return "Created account successfully";
   }

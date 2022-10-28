@@ -32,9 +32,6 @@ export class CreateTransactionWithinRequestDTO {
   destinationNarration: string;
 
   @IsString()
-  sourceAccountID: string;
-
-  @IsString()
   @Length(3, 100)
   sourceNarration: string;
 

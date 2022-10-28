@@ -8,11 +8,12 @@ import { DbContext } from "../DbContext";
 export class IAccount {
   _id: string;
   accountName: string;
+  balance: number;
   accountNumber: string;
   accountOpeningDate: Date;
   accountType: any;
   currency: string;
-  customer: any;
+  customerId: any;
   nubanCode: string;
   lastTransactionDate: Date;
   createdAt?: Date;
@@ -25,6 +26,10 @@ export const AccountSchema = new mongoose.Schema(
     accountName: {
       type: String,
       required: true,
+    },
+    balance: {
+      type: Number,
+      default: 0,
     },
     accountNumber: {
       type: String,
@@ -43,7 +48,7 @@ export const AccountSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    customer: {
+    customerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
     },
@@ -73,4 +78,25 @@ export const AccountSchema = new mongoose.Schema(
   }
 );
 
+AccountSchema.pre("save", async function (next) {
+  const account = this;
+  const dbContext = Container.get(DbContext);
+
+  if (account.isNew) {
+    const customer = await dbContext.customer
+      .findById(account.customerId)
+      .exec();
+    if (customer) {
+      customer.numberOfAccounts = customer.numberOfAccounts + 1;
+      customer.save();
+    }
+  }
+  next();
+});
+
+AccountSchema.pre("deleteOne", async function (next) {
+  // update the customer
+  console.log("ABout to delete account");
+  next();
+});
 export type Account = typeof AccountSchema;

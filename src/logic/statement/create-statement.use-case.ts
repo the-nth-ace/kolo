@@ -1,14 +1,15 @@
-import { IGenericCRUDRepository } from "../../../../data-layer/common/interfaces";
+import { IGenericCRUDRepository } from "../../data-layer/common/interfaces";
 import { BaseStatementResponse } from "../../../../data-layer/statement/statement-response.interface";
 import { Statement } from "../../../../data-layer/statement/statement.entity";
-import { GetResourceByIdDTO } from "@logic/dtos";
+import { CreateStatementDTO } from "@logic/dtos/transaction/statement/create-statement.dto";
 
-export class FindOneStatementUseCase {
+export class CreateStatementUseCase {
   constructor(
     private _statementRepo: IGenericCRUDRepository<Statement>,
-    private dto: GetResourceByIdDTO
+    private dto: CreateStatementDTO
   ) {}
+
   execute(): BaseStatementResponse {
-    return this._statementRepo.findById(this.dto.id);
+    return this._statementRepo.create(this.dto);
   }
 }

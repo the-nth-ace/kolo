@@ -1,4 +1,4 @@
-import { AccountType } from "@data-layer/account/enums/account-type.enum";
+import { AccountType } from "@data-layer/account/";
 import { IsEnum, IsString, Length } from "class-validator";
 
 export class CreateAccountDTO {

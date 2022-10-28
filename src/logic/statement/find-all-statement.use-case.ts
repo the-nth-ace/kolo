@@ -1,4 +1,4 @@
-import { IGenericCRUDRepository } from "../../../../data-layer/common/interfaces";
+import { IGenericCRUDRepository } from "../../data-layer/common/interfaces";
 import { BaseStatementResponse } from "../../../../data-layer/statement/statement-response.interface";
 import { Statement } from "../../../../data-layer/statement/statement.entity";
 

@@ -4,16 +4,24 @@ import {
   UpdateTransactionRequestDTO,
 } from "@logic/transaction";
 import { DbContext } from "@data-layer/DbContext";
-import { InternalServerError } from "routing-controllers";
-import { Service } from "typedi";
+import { InternalServerError, NotFoundError } from "routing-controllers";
+import { Service, Container } from "typedi";
 import { ITransaction } from "@data-layer/transaction/transaction.model";
 
 @Service()
 export class MongoTransactionRepository implements ITransactionRepository {
-  constructor(public dbContext: DbContext) {}
+  dbContext: DbContext;
+  constructor() {
+    this.dbContext = Container.get(DbContext);
+  }
   createMultiple(
     createMultipleTransactionDTO: Array<CreateTransactionOutsideRequestDTO>
-  ): any {}
+  ): any {
+    // TODO Create Many with mongoose
+    // try{
+    //   return await this.dbContext.transaction.(crea)
+    // }
+  }
 
   async createSingle(
     createSingleTransactionDTO: CreateTransactionOutsideRequestDTO
@@ -23,6 +31,7 @@ export class MongoTransactionRepository implements ITransactionRepository {
         createSingleTransactionDTO
       );
     } catch (e) {
+      console.log(e);
       throw new InternalServerError(
         "Something went wrong while creating the Transaction"
       );
@@ -31,7 +40,7 @@ export class MongoTransactionRepository implements ITransactionRepository {
 
   async delete(id: string): Promise<any> {
     try {
-      await this.dbContext.transaction.findByIdAndDelete(id);
+      await this.dbContext.transaction.findByIdAndDelete(id).exec();
       return null;
     } catch (e) {
       throw new InternalServerError(
@@ -41,21 +50,39 @@ export class MongoTransactionRepository implements ITransactionRepository {
   }
 
   async findAll(): Promise<Array<ITransaction>> {
-    return await this.dbContext.transaction.find().exec();
+    const data = await this.dbContext.transaction.find().exec();
+    return data.map((dat) => dat.toObject());
   }
 
-  async findByAccountId(id: string): Promise<ITransaction> {
-    const transaction = await this.dbContext.transaction.findById(id).exec();
-    if (transaction) return transaction;
-    throw new InternalServerError(`Transaction with ID ${id} does not exist`);
+  async findByAccountId(id: string): Promise<Array<ITransaction>> {
+    return await this.dbContext.transaction
+      .find({
+        sourceAccount: id,
+      })
+      .exec();
   }
 
+  // TODO SORT BY FIELD
   findLastN(n: number): any {}
 
-  findOne(id: string): any {}
+  async findOne(id: string): Promise<ITransaction> {
+    const transaction = await this.dbContext.customer.findById(id).exec();
+    if (transaction) return transaction.toObject();
+    throw new NotFoundError("Cusomer with ID was not found");
+  }
 
-  update(
+  async update(
     id: string,
     updateTransactionRequestDTO: UpdateTransactionRequestDTO
-  ): any {}
+  ): Promise<ITransaction | null> {
+    try {
+      return await this.dbContext.transaction
+        .findByIdAndUpdate(id, updateTransactionRequestDTO)
+        .exec();
+    } catch (e) {
+      throw new InternalServerError(
+        "Something went wrong while updating transaction"
+      );
+    }
+  }
 }

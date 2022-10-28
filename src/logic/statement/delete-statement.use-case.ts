@@ -1,5 +1,5 @@
-import { EntityStatus } from "../../../../data-layer/common";
-import { IGenericCRUDRepository } from "../../../../data-layer/common/interfaces";
+import { EntityStatus } from "../../data-layer/common";
+import { IGenericCRUDRepository } from "../../data-layer/common/interfaces";
 import { BaseStatementResponse } from "../../../../data-layer/statement/statement-response.interface";
 import { Statement } from "../../../../data-layer/statement/statement.entity";
 import { DeleteStatementDTO } from "@logic/dtos/transaction/statement/delete-statement.dto";

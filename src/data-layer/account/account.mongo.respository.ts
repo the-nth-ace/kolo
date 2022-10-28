@@ -1,17 +1,26 @@
 import { IAccountRepository } from "@data-layer/account/interfaces";
 import { DbContext } from "@data-layer/DbContext";
-import { Service } from "typedi";
+import { Service, Container } from "typedi";
+import { CreateAccountDTO, UpdateAccountRequestDTO } from "@logic/account";
 import {
-  CreateAccountDTO,
-  CreateAccountRequestDTO,
-  UpdateAccountRequestDTO,
-} from "@logic/account";
-import { InternalServerError, NotFoundError } from "routing-controllers";
+  InternalServerError,
+  NotFoundError,
+  BadRequestError,
+} from "routing-controllers";
 import { IAccount } from "@data-layer/account/account.model";
 
 @Service()
 export class MongoAccountRepository implements IAccountRepository {
-  constructor(public dbContext: DbContext) {}
+  dbContext: DbContext;
+  constructor() {
+    this.dbContext = Container.get(DbContext);
+  }
+
+  async findOneById(id: string): Promise<IAccount> {
+    const acct = await this.dbContext.account.findById(id).exec();
+    if (!acct) throw new NotFoundError("Account was not found");
+    return acct;
+  }
 
   async create(createAccountRequestDTO: CreateAccountDTO): Promise<any> {
     try {
@@ -91,6 +100,34 @@ export class MongoAccountRepository implements IAccountRepository {
     } catch (err: any) {
       throw new InternalServerError(
         "Something went wrong while updating Account details"
+      );
+    }
+  }
+
+  async chargeAccount(id: string, charge: number) {
+    const account = await this.findOneById(id);
+    const newBalance = account.balance - charge;
+    if (newBalance < 0) throw new BadRequestError("Insufficient funds");
+    try {
+      return await this.dbContext.account
+        .findByIdAndUpdate(id, { balance: newBalance })
+        .exec();
+    } catch (err) {
+      throw new InternalServerError(
+        "Something went wrong while charging account"
+      );
+    }
+  }
+  async fundAccount(id: string, charge: number) {
+    const account = await this.findOneById(id);
+    const newBalance = account.balance + charge;
+    try {
+      return await this.dbContext.account
+        .findByIdAndUpdate(id, { balance: newBalance })
+        .exec();
+    } catch (err) {
+      throw new InternalServerError(
+        "Something went wrong while funding account"
       );
     }
   }
