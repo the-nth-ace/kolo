@@ -1,4 +1,4 @@
-import { IAccount } from "@data-layer/account/interfaces/account.interface";
+import { IAccount } from "@data-layer/account/";
 import { IGenericResponse } from "@data-layer/common/interfaces";
 import { ICustomer } from "@data-layer/customer";
 

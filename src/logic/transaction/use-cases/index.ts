@@ -1,4 +1,3 @@
-export * from "./create-multiple-transaction-within.use-case";
 export * from "./create-single-transaction-outside.use-case";
 export * from "./create-single-transaction-within.use-case";
 export * from "./create-multiple-transaction-outside.use-case";

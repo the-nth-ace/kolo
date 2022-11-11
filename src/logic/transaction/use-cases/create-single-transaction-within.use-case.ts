@@ -7,12 +7,14 @@ export class CreateSingleTransactionWithinUseCase implements IUseCase {
   bankCode: any = process.env.BANK_CODE;
   constructor(
     private _transactionRepo: ITransactionRepository,
+    private _sourceAccountId: string,
     private createTransactionWithinRequestDTO: CreateTransactionWithinRequestDTO
   ) {}
   async execute(): Promise<string> {
     try {
       await this._transactionRepo.createSingle({
         ...this.createTransactionWithinRequestDTO,
+        sourceAccountID: this._sourceAccountId,
         destinationBankCode: this.bankCode,
       });
       return "Transaction Created Successfully";

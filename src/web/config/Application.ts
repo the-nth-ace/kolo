@@ -6,15 +6,14 @@ export class Application {
 
   constructor() {
     this.express = new ExpressConfig();
-    const port = process.env.PORT;
+    const port = process.env.PORT || 4000;
 
     this.server = this.express.app.listen(port, () => {
       console.clear();
       console.log(`
       -----------------------------------------------------
-       Server Started! Express: http://localhost:${port}
-       Health : http://localhost:${port}/ping
-       Docs: http://localhost:${port}/api/v1/docs
+       Server Started! Express: :${port}
+       Health :${port}/ping
       -----------------------------------------------------
       `);
     });
