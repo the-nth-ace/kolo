@@ -66,6 +66,7 @@ export class CustomerAddressDTO {
   @IsString()
   street: string;
 }
+
 export class CreateCustomerRequestDTO {
   @IsString()
   @Length(10, 10)

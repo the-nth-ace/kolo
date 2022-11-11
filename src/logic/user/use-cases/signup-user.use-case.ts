@@ -16,9 +16,12 @@ export class SignUpUserUseCase {
       lastName: this.dto.lastName,
       firstName: this.dto.lastName,
     };
-    const user = await this._userRepo.findUserByEmail(this.dto.email);
-    if (user) throw new BadRequestError("User with this email already exists");
-    const newUser = await this._userRepo.createUser(payload);
-    return "Signup Successful";
+    try {
+      await this._userRepo.findUserByEmail(this.dto.email);
+      throw new BadRequestError("User with this email already exists");
+    } catch (err) {
+      const newUser = await this._userRepo.createUser(payload);
+      return "Signup Successful";
+    }
   }
 }

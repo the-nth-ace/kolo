@@ -24,7 +24,7 @@ import { UserRole } from "@data-layer/user";
 export class TransactionController {
   private constructor(private _transactionRepo: MongoTransactionRepository) {}
 
-  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
+  @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF]))
   @Get("/")
   async getAllTransactions() {
     const useCase = new FindAllTransactionsUseCase(this._transactionRepo);
@@ -45,28 +45,6 @@ export class TransactionController {
 
     return await useCase.execute();
   }
-
-  // @Post("/")
-  // async createNewTransactionWithin(
-  //   @Body() createTransactionWithinRequestDTO: CreateTransactionWithinRequestDTO
-  // ) {
-  //   const useCase = new CreateSingleTransactionWithinUseCase(
-  //     this._transactionRepo,
-  //     createTransactionWithinRequestDTO
-  //   );
-  //   return await useCase.execute();
-  // }
-
-  // @Post("/outside/")
-  // async createNewTransactionOutside(
-  //   @Body() createTransactionOutsideRequest: CreateTransactionOutsideRequestDTO
-  // ) {
-  //   const useCase = new CreateSingleTransactionOutsideUseCase(
-  //     this._transactionRepo,
-  //     createTransactionOutsideRequest
-  //   );
-  //   return await useCase.execute();
-  // }
 
   @Get("/:id")
   async getTransactionById(@Param("id") id: string) {

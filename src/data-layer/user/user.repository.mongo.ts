@@ -3,6 +3,7 @@ import { CreateUserDTO } from "@logic/user/";
 import { Container, Service } from "typedi";
 import { IUserRepository } from "@data-layer/user/interfaces";
 import { IUser } from "./user.model";
+import { NotFoundError } from "routing-controllers";
 
 @Service()
 export class MongoUserRepository implements IUserRepository {
@@ -11,11 +12,18 @@ export class MongoUserRepository implements IUserRepository {
     this.dbContext = Container.get(DbContext);
   }
 
-  async findUserByEmail(email: string): Promise<IUser | null> {
-    return this.dbContext.user.findOne({
-      email: email,
-    });
+  async findUserByEmail(email: string): Promise<IUser> {
+    const data = await this.dbContext.user
+      .findOne({
+        email: email,
+      })
+      .exec();
+    if (data == undefined) {
+      throw new NotFoundError("No user with this email exists");
+    }
+    return data.toObject();
   }
+
   async createUser(dto: CreateUserDTO): Promise<any> {
     return await this.dbContext.user.create(dto);
   }

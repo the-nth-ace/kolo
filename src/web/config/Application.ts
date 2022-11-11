@@ -14,6 +14,7 @@ export class Application {
       -----------------------------------------------------
        Server Started! Express: http://localhost:${port}
        Health : http://localhost:${port}/ping
+       Docs: http://localhost:${port}/api/v1/docs
       -----------------------------------------------------
       `);
     });

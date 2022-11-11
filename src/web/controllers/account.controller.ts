@@ -62,7 +62,6 @@ export class AccountController {
   @Get("/:id")
   @UseBefore(AllowedRoles([UserRole.ADMIN, UserRole.STAFF, UserRole.USER]))
   async getAccountById(@Param("id") id: string) {
-    console.log(id);
     const useCase = new FindAccountByIdUseCase(this._accountRepo, id);
     return await useCase.execute();
   }
