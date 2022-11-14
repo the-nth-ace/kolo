@@ -20,11 +20,6 @@ export class ExpressConfig {
   constructor() {
     this.dbContext = Container.get(DbContext);
     this.app = express();
-    this.app.use(
-      cors({
-        origin: ["*"],
-      })
-    );
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
     this.app.use(health.ping());
@@ -40,7 +35,9 @@ export class ExpressConfig {
     useExpressServer(this.app, {
       controllers: [this.controllersPath + "/*.ts"],
       interceptors: [this.interceptorsPath + "/*.ts"],
-      cors: true,
+      cors: {
+        origin: "*",
+      },
     });
   }
 
