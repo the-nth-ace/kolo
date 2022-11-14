@@ -42,9 +42,7 @@ export class ExpressConfig {
     useExpressServer(this.app, {
       controllers: [this.controllersPath + "/*.ts"],
       interceptors: [this.interceptorsPath + "/*.ts"],
-      cors: {
-        origin: "*",
-      },
+      cors: "*",
     });
   }
 
