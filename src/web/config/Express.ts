@@ -21,9 +21,7 @@ export class ExpressConfig {
     this.dbContext = Container.get(DbContext);
     this.app = express();
     this.app.use(
-      cors({
-        origin: ["*"],
-      })
+      cors()
     );
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
@@ -40,7 +38,9 @@ export class ExpressConfig {
     useExpressServer(this.app, {
       controllers: [this.controllersPath + "/*.ts"],
       interceptors: [this.interceptorsPath + "/*.ts"],
-      cors: true,
+      cors: {
+        origin: ["*"],
+      },
     });
   }
 
